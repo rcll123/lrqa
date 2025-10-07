@@ -9,7 +9,7 @@
       margin: 0;
       font-family: Arial, sans-serif;
       display: flex;
-      flex-direction: column; /* 顶栏 + 主体 */
+      flex-direction: column;
       height: 100vh;
     }
 
@@ -26,17 +26,9 @@
       box-sizing: border-box;
     }
 
-    .top-bar .left-logo img {
-      height: 40px;
-    }
-    .top-bar .right-controls {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .top-bar .right-controls img {
-      height: 30px;
-    }
+    .top-bar .left-logo img { height: 40px; }
+    .top-bar .right-controls { display: flex; align-items: center; gap: 15px; }
+    .top-bar .right-controls img { height: 30px; }
     .language-select {
       padding: 6px;
       border: 1px solid #ccc;
@@ -45,10 +37,7 @@
     }
 
     /* 主体布局 */
-    .main {
-      display: flex;
-      flex: 1;
-    }
+    .main { display: flex; flex: 1; }
 
     /* 左侧图片区域 */
     .left-panel {
@@ -78,13 +67,8 @@
       text-align: left;
     }
 
-    .logo {
-      margin-bottom: 20px;
-    }
-
-    .logo img {
-      width: 80px;
-    }
+    .logo { margin-bottom: 20px; }
+    .logo img { width: 80px; }
 
     h1 {
       font-size: 24px;
@@ -121,54 +105,67 @@
       box-sizing: border-box;
     }
 
-    .btn-report {
-      background: #00695c;
-      color: white;
-    }
-    .btn-report:hover {
-      background: #004d40;
-    }
-    .btn-login {
-      background: white;
-      color: #00695c;
-    }
-    .btn-login:hover {
-      background: #f0f0f0;
-    }
+    .btn-report { background: #00695c; color: white; }
+    .btn-report:hover { background: #004d40; }
+    .btn-login { background: white; color: #00695c; }
+    .btn-login:hover { background: #f0f0f0; }
 
     /* ✅ 手机自适应部分 */
     @media (max-width: 768px) {
-      body {
-        height: auto;
-      }
+      body { height: auto; }
+
       .main {
-        flex-direction: column-reverse; /* 背景图移动到底部 */
+        flex-direction: column; /* 上方是文字，下方是图 */
       }
-      .left-panel {
-        width: 100%;
-        height: 200px;
-        padding: 0;
-      }
+
       .right-panel {
         width: 100%;
+        background: #f9f9f9;
         padding: 20px;
         justify-content: center;
       }
-      .content {
-        max-width: 100%;
-        text-align: left;
+
+      .left-panel {
+        order: 2; /* 放到最底部 */
+        width: 100%;
+        height: 400px; /* 背景图往下延伸 */
+        padding: 30px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        background-position: center;
       }
+
+      /* 把内容搬到背景图中显示 */
+      .mobile-actions {
+        color: white;
+        width: 100%;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      }
+
+      .mobile-actions p {
+        color: #fff;
+        margin-bottom: 20px;
+        font-size: 15px;
+      }
+
       .btn {
-        width: 100%; /* 按钮宽度自适应屏幕 */
+        width: 100%;
       }
-      .top-bar {
-        flex-direction: row;
-        height: auto;
-        padding: 10px;
+
+      .btn-report, .btn-login {
+        background-color: rgba(0, 105, 92, 0.9);
+        border: none;
+        color: white;
       }
-      .language-select {
-        font-size: 13px;
+
+      .btn-login {
+        background-color: rgba(255,255,255,0.85);
+        color: #00695c;
       }
+
+      .btn-report:hover { background-color: #004d40; }
+      .btn-login:hover { background-color: #f0f0f0; }
     }
   </style>
 </head>
@@ -197,8 +194,7 @@
 
   <!-- 主体 -->
   <div class="main">
-    <div class="left-panel"></div>
-
+    <!-- 右侧内容（上方） -->
     <div class="right-panel">
       <div class="content">
         <div class="logo">
@@ -206,8 +202,13 @@
         </div>
         <h1>LRQA SpeakUp</h1>
         <p>LRQA SpeakUp 隐私政策</p>
-        <p>通过创建新报告来开始一次保密对话。</p>
+      </div>
+    </div>
 
+    <!-- 左侧背景图（手机下变为底部） -->
+    <div class="left-panel">
+      <div class="mobile-actions">
+        <p>通过创建新报告来开始一次保密对话。</p>
         <button class="btn btn-report" onclick="goToReport()">＋ 新报告</button>
         <button class="btn btn-login" onclick="window.location.href='8digit&pw.html'">🔒 登录</button>
       </div>
@@ -232,7 +233,7 @@
       const t = translations[lang];
       document.querySelector("h1").textContent = t.title;
       document.querySelectorAll("p")[0].textContent = t.policy;
-      document.querySelectorAll("p")[1].textContent = t.desc;
+      document.querySelector(".mobile-actions p").textContent = t.desc;
       document.querySelector(".btn-report").textContent = t.newReport;
       document.querySelector(".btn-login").textContent = t.login;
     }
@@ -243,5 +244,3 @@
   </script>
 </body>
 </html>
-
-
