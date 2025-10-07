@@ -59,6 +59,7 @@
       padding: 20px;
       color: #fff;
       text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      transition: all 0.4s ease;
     }
     .left-panel small {
       font-size: 12px;
@@ -71,7 +72,8 @@
       align-items: center;
       justify-content: flex-start;
       background: #f9f9f9;
-      padding-left: 250px; /* 可调整数字控制整体偏移 */
+      padding-left: 250px; /* 控制整体左移 */
+      transition: all 0.3s ease;
     }
 
     .content {
@@ -149,6 +151,18 @@
         justify-content: flex-start;
         align-items: flex-start;
         background: #f9f9f9;
+        order: 1; /* 让右侧内容在上 */
+      }
+
+      .left-panel {
+        order: 2; /* ✅ 背景图移动到底部 */
+        width: 100%;
+        height: 220px;
+        background-position: bottom center;
+        background-size: cover;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 20px;
       }
 
       .content {
@@ -164,16 +178,6 @@
 
       p {
         font-size: 14px;
-      }
-
-      .left-panel {
-        order: 2;
-        width: 100%;
-        height: 320px;
-        padding: 30px 25px;
-        align-items: flex-start;
-        justify-content: flex-end;
-        background-position: center;
       }
 
       .btn {
