@@ -2,6 +2,7 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LRQA SpeakUp - 匿名投诉</title>
   <style>
     body {
@@ -19,13 +20,14 @@
       background: white;
       border-bottom: 1px solid #ddd;
       display: flex;
-      justify-content: space-between; /* 左右对齐 */
+      justify-content: space-between;
       align-items: center;
       padding: 0 20px;
       box-sizing: border-box;
     }
+
     .top-bar .left-logo img {
-      height: 30px;
+      height: 40px;
     }
     .top-bar .right-controls {
       display: flex;
@@ -42,13 +44,13 @@
       font-size: 14px;
     }
 
-    /* 页面主区域：左右分栏 */
+    /* 主体布局 */
     .main {
       display: flex;
-      flex: 1; /* 占满剩余空间 */
+      flex: 1;
     }
 
-    /* 左侧背景改为图片 */
+    /* 左侧图片区域 */
     .left-panel {
       background: url("bg.jpg") no-repeat center center;
       background-size: cover;
@@ -60,9 +62,6 @@
       color: #fff;
       text-shadow: 0 1px 4px rgba(0,0,0,0.6);
     }
-    .left-panel small {
-      font-size: 12px;
-    }
 
     /* 右侧主区域 */
     .right-panel {
@@ -71,38 +70,45 @@
       align-items: center;
       justify-content: flex-start;
       background: #f9f9f9;
-      padding-left: 250px; /* 可调整数字控制整体偏移 */
-}
-
-.content {
-  max-width: 420px;
-  text-align: left;  /* 文字左对齐 */
+      padding-left: 250px;
     }
+
     .content {
       max-width: 420px;
       text-align: left;
     }
+
     .logo {
       margin-bottom: 20px;
     }
+
     .logo img {
-      width: 100px;
+      width: 80px;
     }
+
     h1 {
       font-size: 24px;
       margin: 10px 0;
       color: #222;
+      font-weight: 400;
     }
+
     p {
       color: #555;
       font-size: 14px;
       margin: 15px 0;
     }
 
-    /* 按钮样式 */
+    p:nth-of-type(1) {
+      color: #00695c;
+      font-weight: 500;
+      margin-bottom: 50px;
+    }
+
+    /* 按钮固定宽度 */
     .btn {
       display: block;
-      width: 100%;
+      width: 580px;
       padding: 14px;
       margin: 12px 0;
       font-size: 16px;
@@ -110,7 +116,11 @@
       border: 1px solid #00695c;
       cursor: pointer;
       transition: 0.3s;
+      text-align: left;
+      padding-left: 20px;
+      box-sizing: border-box;
     }
+
     .btn-report {
       background: #00695c;
       color: white;
@@ -125,17 +135,49 @@
     .btn-login:hover {
       background: #f0f0f0;
     }
+
+    /* ✅ 手机自适应部分 */
+    @media (max-width: 768px) {
+      body {
+        height: auto;
+      }
+      .main {
+        flex-direction: column-reverse; /* 背景图移动到底部 */
+      }
+      .left-panel {
+        width: 100%;
+        height: 200px;
+        padding: 0;
+      }
+      .right-panel {
+        width: 100%;
+        padding: 20px;
+        justify-content: center;
+      }
+      .content {
+        max-width: 100%;
+        text-align: left;
+      }
+      .btn {
+        width: 100%; /* 按钮宽度自适应屏幕 */
+      }
+      .top-bar {
+        flex-direction: row;
+        height: auto;
+        padding: 10px;
+      }
+      .language-select {
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- 顶部白色框 -->
   <div class="top-bar">
-    <!-- 左边 Logo -->
     <div class="left-logo">
       <img src="su.jpg" alt="公司 Logo">
     </div>
-
-    <!-- 右边 Logo + 语言切换 -->
     <div class="right-controls">
       <img src="sr.png" alt="合作 Logo">
       <select class="language-select" onchange="changeLanguage(this.value)">
@@ -153,13 +195,10 @@
     </div>
   </div>
 
-  <!-- 主体区域 -->
+  <!-- 主体 -->
   <div class="main">
-    <!-- 左侧 -->
-    <div class="left-panel">
-    </div>
+    <div class="left-panel"></div>
 
-    <!-- 右侧 -->
     <div class="right-panel">
       <div class="content">
         <div class="logo">
@@ -176,15 +215,33 @@
   </div>
 
   <script>
-    function goToReport() {
-      window.location.href = "report.html";
-    }
+    const translations = {
+      zh: { title: "LRQA SpeakUp", policy: "LRQA SpeakUp 隐私政策", desc: "通过创建新报告来开始一次保密对话。", newReport: "＋ 新报告", login: "🔒 登录" },
+      en: { title: "LRQA SpeakUp", policy: "LRQA SpeakUp Privacy Policy", desc: "Start a confidential conversation by creating a new report.", newReport: "+ New Report", login: "🔒 Login" },
+      ms: { title: "LRQA SpeakUp", policy: "Dasar Privasi LRQA SpeakUp", desc: "Mulakan perbualan sulit dengan membuat laporan baharu.", newReport: "+ Laporan Baharu", login: "🔒 Log Masuk" },
+      my: { title: "LRQA SpeakUp", policy: "LRQA SpeakUp သီးသန့်မူဝါဒ", desc: "သင့်တိုင်တိုင်ပြောရန် အစီရင်ခံစာအသစ်တစ်စောင်ဖန်တီးပါ။", newReport: "＋ အစီရင်ခံစာအသစ်", login: "🔒 ဝင်ရောက်ရန်" },
+      bn: { title: "LRQA SpeakUp", policy: "LRQA SpeakUp গোপনীয়তা নীতি", desc: "একটি নতুন রিপোর্ট তৈরি করে একটি গোপনীয় কথোপকথন শুরু করুন।", newReport: "＋ নতুন রিপোর্ট", login: "🔒 লগইন" },
+      ne: { title: "LRQA SpeakUp", policy: "LRQA SpeakUp गोपनीयता नीति", desc: "नयाँ रिपोर्ट बनाएर गोप्य संवाद सुरु गर्नुहोस्।", newReport: "＋ नयाँ रिपोर्ट", login: "🔒 लगइन" },
+      th: { title: "LRQA SpeakUp", policy: "นโยบายความเป็นส่วนตัวของ LRQA SpeakUp", desc: "เริ่มต้นการสนทนาแบบเป็นความลับโดยสร้างรายงานใหม่", newReport: "＋ รายงานใหม่", login: "🔒 เข้าสู่ระบบ" },
+      hi: { title: "LRQA SpeakUp", policy: "LRQA SpeakUp गोपनीयता नीति", desc: "एक नई रिपोर्ट बनाकर एक गोपनीय वार्ता शुरू करें।", newReport: "＋ नई रिपोर्ट", login: "🔒 लॉगिन" },
+      uk: { title: "LRQA SpeakUp", policy: "Політика конфіденційності LRQA SpeakUp", desc: "Розпочніть конфіденційну розмову, створивши новий звіт.", newReport: "＋ Новий звіт", login: "🔒 Увійти" },
+      id: { title: "LRQA SpeakUp", policy: "Kebijakan Privasi LRQA SpeakUp", desc: "Mulai percakapan rahasia dengan membuat laporan baru.", newReport: "＋ Laporan Baru", login: "🔒 Masuk" }
+    };
 
     function changeLanguage(lang) {
-      alert("切换语言: " + lang);
-      // 这里可以跳转到对应语言版本的页面
-      // window.location.href = lang + "/index.html";
+      const t = translations[lang];
+      document.querySelector("h1").textContent = t.title;
+      document.querySelectorAll("p")[0].textContent = t.policy;
+      document.querySelectorAll("p")[1].textContent = t.desc;
+      document.querySelector(".btn-report").textContent = t.newReport;
+      document.querySelector(".btn-login").textContent = t.login;
+    }
+
+    function goToReport() {
+      window.location.href = "report.html";
     }
   </script>
 </body>
 </html>
+
+
