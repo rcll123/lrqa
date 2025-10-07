@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>匿名投诉表单</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 420px;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #00695c;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>匿名投诉表单</h2>
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      <label for="category">投诉类别：</label>
+      <input type="text" id="category" name="category" placeholder="请输入投诉类别">
+
+      <label for="details">投诉详情：</label>
+      <textarea id="details" name="details" placeholder="请输入您的投诉内容"></textarea>
+
+      <label for="attachment">附件链接（可选）：</label>
+      <input type="text" id="attachment" name="attachment" placeholder="如有可附加文件链接">
+
+      <button type="submit">提交投诉</button>
+    </form>
+  </div>
+</body>
+</html>

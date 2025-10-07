@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>LRQA SpeakUp - 匿名投诉</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column; /* 顶栏 + 主体 */
+      height: 100vh;
+    }
+
+    /* 顶部白色框 */
+    .top-bar {
+      width: 100%;
+      height: 65px;
+      background: white;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between; /* 左右对齐 */
+      align-items: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+    .top-bar .left-logo img {
+      height: 30px;
+    }
+    .top-bar .right-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .top-bar .right-controls img {
+      height: 30px;
+    }
+    .language-select {
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    /* 页面主区域：左右分栏 */
+    .main {
+      display: flex;
+      flex: 1; /* 占满剩余空间 */
+    }
+
+    /* 左侧背景改为图片 */
+    .left-panel {
+      background: url("bg.jpg") no-repeat center center;
+      background-size: cover;
+      width: 25%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+    .left-panel small {
+      font-size: 12px;
+    }
+
+    /* 右侧主区域 */
+    .right-panel {
+      width: 75%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background: #f9f9f9;
+      padding-left: 250px; /* 可调整数字控制整体偏移 */
+}
+
+.content {
+  max-width: 420px;
+  text-align: left;  /* 文字左对齐 */
+    }
+    .content {
+      max-width: 420px;
+      text-align: left;
+    }
+    .logo {
+      margin-bottom: 20px;
+    }
+    .logo img {
+      width: 100px;
+    }
+    h1 {
+      font-size: 24px;
+      margin: 10px 0;
+      color: #222;
+    }
+    p {
+      color: #555;
+      font-size: 14px;
+      margin: 15px 0;
+    }
+
+    /* 按钮样式 */
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #00695c;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn-report {
+      background: #00695c;
+      color: white;
+    }
+    .btn-report:hover {
+      background: #004d40;
+    }
+    .btn-login {
+      background: white;
+      color: #00695c;
+    }
+    .btn-login:hover {
+      background: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部白色框 -->
+  <div class="top-bar">
+    <!-- 左边 Logo -->
+    <div class="left-logo">
+      <img src="su.jpg" alt="公司 Logo">
+    </div>
+
+    <!-- 右边 Logo + 语言切换 -->
+    <div class="right-controls">
+      <img src="sr.png" alt="合作 Logo">
+      <select class="language-select" onchange="changeLanguage(this.value)">
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+        <option value="ms">Bahasa Melayu</option>
+        <option value="my">မြန်မာစာ (Burmese)</option>
+        <option value="bn">বাংলা (Bengali)</option>
+        <option value="ne">नेपाली (Nepali)</option>
+        <option value="th">ไทย (Thai)</option>
+        <option value="hi">हिन्दी (Hindi)</option>
+        <option value="uk">Українська (Ukrainian)</option>
+        <option value="id">Bahasa Indonesia</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 主体区域 -->
+  <div class="main">
+    <!-- 左侧 -->
+    <div class="left-panel">
+    </div>
+
+    <!-- 右侧 -->
+    <div class="right-panel">
+      <div class="content">
+        <div class="logo">
+          <img src="mylogo.png" alt="公司 Logo">
+        </div>
+        <h1>LRQA SpeakUp</h1>
+        <p>LRQA SpeakUp 隐私政策</p>
+        <p>通过创建新报告来开始一次保密对话。</p>
+
+        <button class="btn btn-report" onclick="goToReport()">＋ 新报告</button>
+        <button class="btn btn-login" onclick="window.location.href='8digit&pw.html'">🔒 登录</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function goToReport() {
+      window.location.href = "report.html";
+    }
+
+    function changeLanguage(lang) {
+      alert("切换语言: " + lang);
+      // 这里可以跳转到对应语言版本的页面
+      // window.location.href = lang + "/index.html";
+    }
+  </script>
+</body>
+</html>
