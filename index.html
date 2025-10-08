@@ -160,11 +160,11 @@
     }
 
     /* ✅ 手机模式 */
-@media (max-width: 650px) {
-  .bottom-block {
-    padding-top: 150px; /* 手机版时字体往下移 */
-  }
-}
+    @media (max-width: 650px) {
+      body.mobile {
+        height: auto;
+        flex-direction: column;
+      }
 
       .main.mobile {
         flex-direction: column;
@@ -198,9 +198,9 @@
 
       /* ✅ 手机下移控制 */
       .bottom-block {
-        margin-top: 180px;
-      }
-
+    padding-top: 150px; /* 手机版时字体往下移 */
+  }
+}
       .btn.mobile {
         width: 90%;
         margin: 10px 0;
@@ -324,14 +324,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
