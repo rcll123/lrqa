@@ -63,7 +63,7 @@
 </head>
 <body>
   <div class="form-container">
-    <h2 id="form-title"></h2>
+    <h2 id="form-title">匿名投诉表单</h2>
 
     <form id="complaint-form" action="https://formspree.io/f/mdkwzqko" method="POST" enctype="multipart/form-data">
       <label for="category" id="label-category"></label>
@@ -94,7 +94,7 @@
       id: { title:"Form Pengaduan Anonim", category:"Kategori Pengaduan:", category_ph:"Masukkan kategori pengaduan", details:"Detail Pengaduan:", details_ph:"Masukkan detail pengaduan Anda", file:"Unggah Lampiran (opsional):", submit:"Kirim Pengaduan" }
     };
 
-    // 获取 localStorage 语言
+    // 获取 localStorage 里保存的语言
     const lang = localStorage.getItem('lang') || "zh";
     const t = translations[lang] || translations.zh;
 
