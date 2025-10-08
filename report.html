@@ -1,108 +1,144 @@
-<script>
-  // 多语言字典（完整语言列表）
-  const translations = {
-    zh: {
-      title: "匿名投诉表单",
-      category: "投诉类别：",
-      category_ph: "请输入投诉类别",
-      details: "投诉详情：",
-      details_ph: "请输入您的投诉内容",
-      file: "上传附件（可选）：",
-      submit: "提交投诉"
-    },
-    en: {
-      title: "Anonymous Complaint Form",
-      category: "Complaint Category:",
-      category_ph: "Enter complaint category",
-      details: "Complaint Details:",
-      details_ph: "Enter your complaint details",
-      file: "Upload Attachment (optional):",
-      submit: "Submit Complaint"
-    },
-    ms: {
-      title: "Borang Aduan Tanpa Nama",
-      category: "Kategori Aduan:",
-      category_ph: "Masukkan kategori aduan",
-      details: "Butiran Aduan:",
-      details_ph: "Masukkan butiran aduan anda",
-      file: "Muat Naik Lampiran (pilihan):",
-      submit: "Hantar Aduan"
-    },
-    my: {
-      title: "LRQA SpeakUp သီးသန့်မူဝါဒ အစီရင်ခံစာ",
-      category: "အကြောင်းအရာအမျိုးအစား:",
-      category_ph: "အကြောင်းအရာအမျိုးအစားထည့်ပါ",
-      details: "အကြောင်းအရာအသေးစိတ်:",
-      details_ph: "သင့်အကြောင်းအရာအသေးစိတ်ထည့်ပါ",
-      file: "ဖိုင်တင်ရန် (စိတ်ကြိုက်):",
-      submit: "တင်သွင်းရန်"
-    },
-    bn: {
-      title: "গোপনীয় অভিযোগ ফর্ম",
-      category: "অভিযোগের ধরন:",
-      category_ph: "অভিযোগের ধরন লিখুন",
-      details: "অভিযোগের বিস্তারিত:",
-      details_ph: "আপনার অভিযোগের বিস্তারিত লিখুন",
-      file: "সংযুক্তি আপলোড করুন (ঐচ্ছিক):",
-      submit: "অভিযোগ জমা দিন"
-    },
-    ne: {
-      title: "गोप्य गुनासो फारम",
-      category: "गुनासोको श्रेणी:",
-      category_ph: "गुनासोको श्रेणी प्रविष्ट गर्नुहोस्",
-      details: "गुनासो विवरण:",
-      details_ph: "तपाईंको गुनासो विवरण प्रविष्ट गर्नुहोस्",
-      file: "संलग्न फाइल अपलोड गर्नुहोस् (वैकल्पिक):",
-      submit: "गुनासो पेश गर्नुहोस्"
-    },
-    th: {
-      title: "ฟอร์มร้องเรียนแบบไม่ระบุชื่อ",
-      category: "ประเภทการร้องเรียน:",
-      category_ph: "กรอกประเภทการร้องเรียน",
-      details: "รายละเอียดการร้องเรียน:",
-      details_ph: "กรอกรายละเอียดการร้องเรียนของคุณ",
-      file: "อัปโหลดไฟล์แนบ (ถ้ามี):",
-      submit: "ส่งเรื่องร้องเรียน"
-    },
-    hi: {
-      title: "गोपनीय शिकायत फ़ॉर्म",
-      category: "शिकायत श्रेणी:",
-      category_ph: "शिकायत श्रेणी दर्ज करें",
-      details: "शिकायत विवरण:",
-      details_ph: "अपनी शिकायत का विवरण दर्ज करें",
-      file: "संलग्नक अपलोड करें (वैकल्पिक):",
-      submit: "शिकायत जमा करें"
-    },
-    uk: {
-      title: "Анонімна форма скарги",
-      category: "Категорія скарги:",
-      category_ph: "Введіть категорію скарги",
-      details: "Деталі скарги:",
-      details_ph: "Введіть деталі вашої скарги",
-      file: "Завантажити вкладення (необов'язково):",
-      submit: "Надіслати скаргу"
-    },
-    id: {
-      title: "Form Pengaduan Anonim",
-      category: "Kategori Pengaduan:",
-      category_ph: "Masukkan kategori pengaduan",
-      details: "Detail Pengaduan:",
-      details_ph: "Masukkan detail pengaduan Anda",
-      file: "Unggah Lampiran (opsional):",
-      submit: "Kirim Pengaduan"
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Anonymous Complaint Form</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-  };
+    .form-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 420px;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #00695c;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #004d40;
+    }
+    /* 可选：顶部语言下拉 */
+    .lang-select {
+      margin-bottom: 15px;
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <!-- 可选：语言切换 -->
+    <select class="lang-select" id="lang-select"></select>
 
-  // 获取语言，如果 localStorage 没有就用默认 zh
-  const lang = localStorage.getItem('lang') || "zh";
-  const t = translations[lang] || translations.zh;
+    <h2 id="form-title"></h2>
+    <form id="complaint-form" action="https://formspree.io/f/mdkwzqko" method="POST" enctype="multipart/form-data">
+      <label for="category" id="label-category"></label>
+      <input type="text" id="category" name="category" placeholder="">
 
-  document.getElementById("form-title").textContent = t.title;
-  document.getElementById("label-category").textContent = t.category;
-  document.getElementById("category").placeholder = t.category_ph;
-  document.getElementById("label-details").textContent = t.details;
-  document.getElementById("details").placeholder = t.details_ph;
-  document.getElementById("label-file").textContent = t.file;
-  document.getElementById("submit-btn").textContent = t.submit;
-</script>
+      <label for="details" id="label-details"></label>
+      <textarea id="details" name="details" placeholder=""></textarea>
 
+      <label for="file" id="label-file"></label>
+      <input type="file" id="file" name="file">
+
+      <button type="submit" id="submit-btn"></button>
+    </form>
+  </div>
+
+  <script>
+    // 多语言字典（完整语言列表）
+    const translations = {
+      zh: { title:"匿名投诉表单", category:"投诉类别：", category_ph:"请输入投诉类别", details:"投诉详情：", details_ph:"请输入您的投诉内容", file:"上传附件（可选）：", submit:"提交投诉" },
+      en: { title:"Anonymous Complaint Form", category:"Complaint Category:", category_ph:"Enter complaint category", details:"Complaint Details:", details_ph:"Enter your complaint details", file:"Upload Attachment (optional):", submit:"Submit Complaint" },
+      ms: { title:"Borang Aduan Tanpa Nama", category:"Kategori Aduan:", category_ph:"Masukkan kategori aduan", details:"Butiran Aduan:", details_ph:"Masukkan butiran aduan anda", file:"Muat Naik Lampiran (pilihan):", submit:"Hantar Aduan" },
+      my: { title:"LRQA SpeakUp သီးသန့်မူဝါဒ အစီရင်ခံစာ", category:"အကြောင်းအရာအမျိုးအစား:", category_ph:"အကြောင်းအရာအမျိုးအစားထည့်ပါ", details:"အကြောင်းအရာအသေးစိတ်:", details_ph:"သင့်အကြောင်းအရာအသေးစိတ်ထည့်ပါ", file:"ဖိုင်တင်ရန် (စိတ်ကြိုက်):", submit:"တင်သွင်းရန်" },
+      bn: { title:"গোপনীয় অভিযোগ ফর্ম", category:"অভিযোগের ধরন:", category_ph:"অভিযোগের ধরন লিখুন", details:"অভিযোগের বিস্তারিত:", details_ph:"আপনার অভিযোগের বিস্তারিত লিখুন", file:"সংযুক্তি আপলোড করুন (ঐচ্ছিক):", submit:"অভিযোগ জমা দিন" },
+      ne: { title:"गोप्य गुनासो फारम", category:"गुनासोको श्रेणी:", category_ph:"गुनासोको श्रेणी प्रविष्ट गर्नुहोस्", details:"गुनासो विवरण:", details_ph:"तपाईंको गुनासो विवरण प्रविष्ट गर्नुहोस्", file:"संलग्न फाइल अपलोड गर्नुहोस् (वैकल्पिक):", submit:"गुनासो पेश गर्नुहोस्" },
+      th: { title:"ฟอร์มร้องเรียนแบบไม่ระบุชื่อ", category:"ประเภทการร้องเรียน:", category_ph:"กรอกประเภทการร้องเรียน", details:"รายละเอียดการร้องเรียน:", details_ph:"กรอกรายละเอียดการร้องเรียนของคุณ", file:"อัปโหลดไฟล์แนบ (ถ้ามี):", submit:"ส่งเรื่องร้องเรียน" },
+      hi: { title:"गोपनीय शिकायत फ़ॉर्म", category:"शिकायत श्रेणी:", category_ph:"शिकायत श्रेणी दर्ज करें", details:"शिकायत विवरण:", details_ph:"अपनी शिकायत का विवरण दर्ज करें", file:"संलग्नक अपलोड करें (वैकल्पिक):", submit:"शिकायत जमा करें" },
+      uk: { title:"Анонімна форма скарги", category:"Категорія скарги:", category_ph:"Введіть категорію скарги", details:"Деталі скарги:", details_ph:"Введіть деталі вашої скарги", file:"Завантажити вкладення (необов'язково):", submit:"Надіслати скаргу" },
+      id: { title:"Form Pengaduan Anonim", category:"Kategori Pengaduan:", category_ph:"Masukkan kategori pengaduan", details:"Detail Pengaduan:", details_ph:"Masukkan detail pengaduan Anda", file:"Unggah Lampiran (opsional):", submit:"Kirim Pengaduan" }
+    };
+
+    // 初始化语言下拉
+    const langSelect = document.getElementById('lang-select');
+    for (const key in translations) {
+      const option = document.createElement('option');
+      option.value = key;
+      option.textContent = translations[key].title;
+      langSelect.appendChild(option);
+    }
+
+    // 获取保存的语言，默认 zh
+    let lang = localStorage.getItem('lang') || "zh";
+    langSelect.value = lang;
+
+    function updateLanguage(lang) {
+      const t = translations[lang] || translations.zh;
+      document.getElementById("form-title").textContent = t.title;
+      document.getElementById("label-category").textContent = t.category;
+      document.getElementById("category").placeholder = t.category_ph;
+      document.getElementById("label-details").textContent = t.details;
+      document.getElementById("details").placeholder = t.details_ph;
+      document.getElementById("label-file").textContent = t.file;
+      document.getElementById("submit-btn").textContent = t.submit;
+
+      // 保存语言到 localStorage
+      localStorage.setItem('lang', lang);
+    }
+
+    // 页面加载时更新语言
+    updateLanguage(lang);
+
+    // 下拉切换语言
+    langSelect.addEventListener('change', (e) => {
+      updateLanguage(e.target.value);
+    });
+  </script>
+</body>
+</html>
