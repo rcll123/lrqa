@@ -302,8 +302,12 @@
     }
 
     function goToReport() {
-      window.location.href = "report.html";
-    }
+  // 把当前语言存到 localStorage
+  const lang = document.querySelector('.language-select').value;
+  localStorage.setItem('lang', lang);
+  window.location.href = "report.html";
+}
+
 
     // ✅ 自动检测设备并添加相应 class
     function adjustLayout() {
@@ -324,4 +328,5 @@
   </script>
 </body>
 </html>
+
 
