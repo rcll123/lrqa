@@ -59,20 +59,10 @@
     button:hover {
       background: #004d40;
     }
-    .lang-select {
-      margin-bottom: 15px;
-      width: 100%;
-      padding: 8px;
-      font-size: 14px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <select class="lang-select" id="lang-select"></select>
-
     <h2 id="form-title"></h2>
     <form id="complaint-form" action="https://formspree.io/f/mdkwzqko" method="POST" enctype="multipart/form-data">
       <label for="category" id="label-category"></label>
@@ -89,6 +79,7 @@
   </div>
 
   <script>
+    // 多语言字典
     const translations = {
       zh: { title:"匿名投诉表单", category:"投诉类别：", category_ph:"请输入投诉类别", details:"投诉详情：", details_ph:"请输入您的投诉内容", file:"上传附件（可选）：", submit:"提交投诉" },
       en: { title:"Anonymous Complaint Form", category:"Complaint Category:", category_ph:"Enter complaint category", details:"Complaint Details:", details_ph:"Enter your complaint details", file:"Upload Attachment (optional):", submit:"Submit Complaint" },
@@ -102,35 +93,18 @@
       id: { title:"Form Pengaduan Anonim", category:"Kategori Pengaduan:", category_ph:"Masukkan kategori pengaduan", details:"Detail Pengaduan:", details_ph:"Masukkan detail pengaduan Anda", file:"Unggah Lampiran (opsional):", submit:"Kirim Pengaduan" }
     };
 
-    const langSelect = document.getElementById('lang-select');
-    for (const key in translations) {
-      const option = document.createElement('option');
-      option.value = key;
-      option.textContent = translations[key].title;
-      langSelect.appendChild(option);
-    }
+    // 自动读取 localStorage 的语言
+    const lang = localStorage.getItem('lang') || "zh";
+    const t = translations[lang] || translations.zh;
 
-    let lang = localStorage.getItem('lang') || "zh";
-    langSelect.value = lang;
-
-    function updateLanguage(lang) {
-      const t = translations[lang] || translations.zh;
-      document.getElementById("form-title").textContent = t.title;
-      document.getElementById("label-category").textContent = t.category;
-      document.getElementById("category").placeholder = t.category_ph;
-      document.getElementById("label-details").textContent = t.details;
-      document.getElementById("details").placeholder = t.details_ph;
-      document.getElementById("label-file").textContent = t.file;
-      document.getElementById("submit-btn").textContent = t.submit;
-      localStorage.setItem('lang', lang);
-    }
-
-    updateLanguage(lang);
-
-    langSelect.addEventListener('change', (e) => {
-      updateLanguage(e.target.value);
-    });
+    // 更新表单内容
+    document.getElementById("form-title").textContent = t.title;
+    document.getElementById("label-category").textContent = t.category;
+    document.getElementById("category").placeholder = t.category_ph;
+    document.getElementById("label-details").textContent = t.details;
+    document.getElementById("details").placeholder = t.details_ph;
+    document.getElementById("label-file").textContent = t.file;
+    document.getElementById("submit-btn").textContent = t.submit;
   </script>
 </body>
 </html>
-
