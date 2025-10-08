@@ -8,7 +8,7 @@
       margin: 0;
       font-family: Arial, sans-serif;
       display: flex;
-      flex-direction: column; /* 顶栏 + 主体 */
+      flex-direction: column;
       height: 100vh;
     }
 
@@ -19,7 +19,7 @@
       background: white;
       border-bottom: 1px solid #ddd;
       display: flex;
-      justify-content: space-between; /* 左右对齐 */
+      justify-content: space-between;
       align-items: center;
       padding: 0 20px;
       box-sizing: border-box;
@@ -45,10 +45,10 @@
     /* 页面主区域：左右分栏 */
     .main {
       display: flex;
-      flex: 1; /* 占满剩余空间 */
+      flex: 1;
     }
 
-    /* 左侧背景改为图片 */
+    /* 左侧背景 */
     .left-panel {
       background: url("bg.jpg") no-repeat center center;
       background-size: cover;
@@ -59,33 +59,30 @@
       padding: 20px;
       color: #fff;
       text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-      transition: all 0.4s ease;
-    }
-    .left-panel small {
-      font-size: 12px;
     }
 
-    /* 右侧主区域 */
+    /* 右侧内容 */
     .right-panel {
       width: 75%;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       background: #f9f9f9;
-      padding-left: 250px; /* 控制整体左移 */
-      transition: all 0.3s ease;
+      padding-left: 250px;
     }
 
     .content {
       max-width: 420px;
-      text-align: left;  /* 文字左对齐 */
+      text-align: left;
     }
+
     .logo {
       margin-bottom: 20px;
     }
     .logo img {
       width: 80px;
     }
+
     h1 {
       font-size: 24px;
       margin: 10px 0;
@@ -98,6 +95,7 @@
       font-size: 14px;
       margin: 15px 0;
     }
+
     p:nth-of-type(1) {
       color: #00695c;
       font-weight: 500;
@@ -107,7 +105,7 @@
     /* 按钮样式 */
     .btn {
       display: block;
-      width: 580px; /* 固定宽度 */
+      width: 580px;
       padding: 14px;
       margin: 12px 0;
       font-size: 16px;
@@ -134,7 +132,7 @@
       background: #f0f0f0;
     }
 
-    /* ✅ 手机模式自适应 */
+    /* ✅ 手机模式：背景图移到底部 */
     @media (max-width: 720px) {
       body {
         height: auto;
@@ -151,33 +149,22 @@
         justify-content: flex-start;
         align-items: flex-start;
         background: #f9f9f9;
-        order: 1; /* 让右侧内容在上 */
+        order: 1; /* 内容在上 */
       }
 
       .left-panel {
-        order: 2; /* ✅ 背景图移动到底部 */
+        order: 2; /* 背景图移到底部 */
         width: 100%;
-        height: 220px;
-        background-position: bottom center;
+        height: 300px;
+        background-position: center;
         background-size: cover;
-        align-items: flex-end;
-        justify-content: center;
-        padding: 20px;
+        padding: 0;
+        margin-top: 20px;
       }
 
       .content {
-        text-align: left;
         width: 100%;
         max-width: none;
-      }
-
-      h1 {
-        font-size: 20px;
-        margin-top: 0;
-      }
-
-      p {
-        font-size: 14px;
       }
 
       .btn {
@@ -189,6 +176,10 @@
         font-size: 15px;
       }
 
+      h1 {
+        font-size: 20px;
+      }
+
       .top-bar {
         flex-direction: row;
         height: auto;
@@ -198,7 +189,7 @@
 </head>
 
 <body>
-  <!-- 顶部白色框 -->
+  <!-- 顶部白色栏 -->
   <div class="top-bar">
     <div class="left-logo">
       <img src="su.jpg" alt="公司 Logo">
@@ -220,7 +211,7 @@
     </div>
   </div>
 
-  <!-- 主体区域 -->
+  <!-- 主体 -->
   <div class="main">
     <div class="left-panel"></div>
     <div class="right-panel">
@@ -238,7 +229,6 @@
     </div>
   </div>
 
-  <!-- 多语言脚本 -->
   <script>
     const translations = {
       zh: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp 隐私政策", desc:"通过创建新报告来开始一次保密对话。", newReport:"＋ 新报告", login:"🔒 登录" },
@@ -268,3 +258,4 @@
   </script>
 </body>
 </html>
+
