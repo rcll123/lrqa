@@ -63,9 +63,9 @@
 </head>
 <body>
   <div class="form-container">
-    <h2 id="form-title">匿名投诉表单</h2>
+    <h2 id="form-title"></h2>
 
-    <form id="complaint-form" action="https://formspree.io/f/mdkwzqko" method="POST" enctype="multipart/form-data">
+    <form id="complaint-form" action="https://formspree.io/f/manpjren" method="POST" enctype="multipart/form-data">
       <label for="category" id="label-category"></label>
       <input type="text" id="category" name="category" placeholder="">
 
@@ -75,12 +75,18 @@
       <label for="file" id="label-file"></label>
       <input type="file" id="file" name="file">
 
+      <!-- 隐藏字段区分页面来源 -->
+      <input type="hidden" name="source_page" value="report">
+      <!-- 隐藏字段记录二维码ID -->
+      <input type="hidden" name="qr_id" id="qr-id" value="">
+      <!-- 隐藏字段记录语言 -->
+      <input type="hidden" name="lang" id="lang" value="">
+
       <button type="submit" id="submit-btn"></button>
     </form>
   </div>
 
   <script>
-    // 多语言字典
     const translations = {
       zh: { title:"匿名投诉表单", category:"投诉类别：", category_ph:"请输入投诉类别", details:"投诉详情：", details_ph:"请输入您的投诉内容", file:"上传附件（可选）：", submit:"提交投诉" },
       en: { title:"Anonymous Complaint Form", category:"Complaint Category:", category_ph:"Enter complaint category", details:"Complaint Details:", details_ph:"Enter your complaint details", file:"Upload Attachment (optional):", submit:"Submit Complaint" },
@@ -94,11 +100,22 @@
       id: { title:"Form Pengaduan Anonim", category:"Kategori Pengaduan:", category_ph:"Masukkan kategori pengaduan", details:"Detail Pengaduan:", details_ph:"Masukkan detail pengaduan Anda", file:"Unggah Lampiran (opsional):", submit:"Kirim Pengaduan" }
     };
 
-    // 获取 localStorage 里保存的语言
-    const lang = localStorage.getItem('lang') || "zh";
-    const t = translations[lang] || translations.zh;
+    // 自动检测浏览器语言并映射到短码
+    const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
+    let lang = 'zh';
+    if (browserLang.startsWith('en')) lang='en';
+    else if (browserLang.startsWith('ms')) lang='ms';
+    else if (browserLang.startsWith('my')) lang='my';
+    else if (browserLang.startsWith('bn')) lang='bn';
+    else if (browserLang.startsWith('ne')) lang='ne';
+    else if (browserLang.startsWith('th')) lang='th';
+    else if (browserLang.startsWith('hi')) lang='hi';
+    else if (browserLang.startsWith('uk')) lang='uk';
+    else if (browserLang.startsWith('id')) lang='id';
 
-    // 更新表单内容，包括标题
+    const t = translations[lang];
+
+    // 更新页面内容
     document.getElementById("form-title").textContent = t.title;
     document.getElementById("label-category").textContent = t.category;
     document.getElementById("category").placeholder = t.category_ph;
@@ -106,6 +123,14 @@
     document.getElementById("details").placeholder = t.details_ph;
     document.getElementById("label-file").textContent = t.file;
     document.getElementById("submit-btn").textContent = t.submit;
+
+    // 获取二维码参数
+    const urlParams = new URLSearchParams(window.location.search);
+    const qrId = urlParams.get('qr') || 'default';
+    document.getElementById('qr-id').value = qrId;
+
+    // 记录语言
+    document.getElementById('lang').value = lang;
   </script>
 </body>
 </html>
