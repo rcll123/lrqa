@@ -24,17 +24,21 @@
       padding: 0 20px;
       box-sizing: border-box;
     }
+
     .top-bar .left-logo img {
       height: 40px;
     }
+
     .top-bar .right-controls {
       display: flex;
       align-items: center;
       gap: 15px;
     }
+
     .top-bar .right-controls img {
       height: 30px;
     }
+
     .language-select {
       padding: 6px;
       border: 1px solid #ccc;
@@ -42,13 +46,13 @@
       font-size: 14px;
     }
 
-    /* 页面主区域：左右分栏 */
+    /* 主体部分：左右结构 */
     .main {
       display: flex;
       flex: 1;
     }
 
-    /* 左侧背景 */
+    /* 左边绿色背景图 */
     .left-panel {
       background: url("bg.jpg") no-repeat center center;
       background-size: cover;
@@ -59,9 +63,10 @@
       padding: 20px;
       color: #fff;
       text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      position: relative;
     }
 
-    /* 右侧内容 */
+    /* 右侧主要内容 */
     .right-panel {
       width: 75%;
       display: flex;
@@ -69,6 +74,7 @@
       justify-content: flex-start;
       background: #f9f9f9;
       padding-left: 250px;
+      position: relative;
     }
 
     .content {
@@ -79,6 +85,7 @@
     .logo {
       margin-bottom: 20px;
     }
+
     .logo img {
       width: 80px;
     }
@@ -117,22 +124,34 @@
       padding-left: 20px;
       box-sizing: border-box;
     }
+
     .btn-report {
       background: #00695c;
       color: white;
     }
+
     .btn-report:hover {
       background: #004d40;
     }
+
     .btn-login {
       background: white;
       color: #00695c;
     }
+
     .btn-login:hover {
       background: #f0f0f0;
     }
 
-    /* ✅ 手机模式：背景图移到底部 */
+    /* ✅ by SpeakUp 标志 */
+    .footer-credit {
+      text-align: right;
+      color: #00897b;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    /* ✅ 手机模式：背景图到底部 + 绿色底色 */
     @media (max-width: 720px) {
       body {
         height: auto;
@@ -149,16 +168,19 @@
         justify-content: flex-start;
         align-items: flex-start;
         background: #f9f9f9;
-        order: 1; /* 内容在上 */
+        order: 1;
       }
 
       .left-panel {
-        order: 2; /* 背景图移到底部 */
+        order: 2;
         width: 100%;
-        height: 300px;
-        background-position: center;
+        height: 280px;
+        background: linear-gradient(to top, #004d40, #00695c);
+        background-image: url("bg.jpg");
+        background-repeat: no-repeat;
         background-size: cover;
-        padding: 0;
+        background-position: center;
+        position: relative;
         margin-top: 20px;
       }
 
@@ -183,6 +205,14 @@
       .top-bar {
         flex-direction: row;
         height: auto;
+      }
+
+      .footer-credit {
+        position: absolute;
+        bottom: 8px;
+        right: 15px;
+        color: #a5d6a7;
+        font-size: 12px;
       }
     }
   </style>
@@ -211,9 +241,11 @@
     </div>
   </div>
 
-  <!-- 主体 -->
+  <!-- 主体内容 -->
   <div class="main">
-    <div class="left-panel"></div>
+    <div class="left-panel">
+      <div class="footer-credit">by SpeakUp</div>
+    </div>
     <div class="right-panel">
       <div class="content">
         <div class="logo">
@@ -232,7 +264,7 @@
   <script>
     const translations = {
       zh: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp 隐私政策", desc:"通过创建新报告来开始一次保密对话。", newReport:"＋ 新报告", login:"🔒 登录" },
-      en: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp Privacy Policy", desc:"Start a confidential conversation by creating a new report.", newReport:"+ New Report", login:"🔒 Login" },
+      en: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp Privacy Policy", desc:"Start a confidential conversation by creating a new report.", newReport:"+ New report", login:"🔒 Log in" },
       ms: { title:"LRQA SpeakUp", policy:"Dasar Privasi LRQA SpeakUp", desc:"Mulakan perbualan sulit dengan membuat laporan baharu.", newReport:"+ Laporan Baharu", login:"🔒 Log Masuk" },
       my: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp သီးသန့်မူဝါဒ", desc:"သင့်တိုင်တိုင်ပြောရန် အစီရင်ခံစာအသစ်တစ်စောင်ဖန်တီးပါ။", newReport:"＋ အစီရင်ခံစာအသစ်", login:"🔒 ဝင်ရောက်ရန်" },
       bn: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp গোপনীয়তা নীতি", desc:"একটি নতুন রিপোর্ট তৈরি করে একটি গোপনীয় কথোপকথন শুরু করুন।", newReport:"＋ নতুন রিপোর্ট", login:"🔒 লগইন" },
@@ -258,4 +290,3 @@
   </script>
 </body>
 </html>
-
