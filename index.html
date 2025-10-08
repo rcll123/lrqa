@@ -154,6 +154,11 @@
       margin-top: 10px;
     }
 
+    /* ✅ 移动块样式控制 */
+    .bottom-block {
+      margin-top: 0;
+    }
+
     /* ✅ 手机模式 */
     @media (max-width: 650px) {
       body.mobile {
@@ -187,11 +192,14 @@
       }
 
       .content.mobile {
-  width: 100%;
-  max-width: none;
-  margin-top: 100px; /* 👈 往下移 */
-}
+        width: 100%;
+        max-width: none;
+      }
 
+      /* ✅ 手机下移控制 */
+      .bottom-block {
+        margin-top: 80px;
+      }
 
       .btn.mobile {
         width: 90%;
@@ -257,10 +265,15 @@
         </div>
         <h1>LRQA SpeakUp</h1>
         <p>LRQA SpeakUp 隐私政策</p>
-        <p>通过创建新报告来开始一次保密对话。</p>
 
-        <button class="btn btn-report" onclick="goToReport()">＋ 新报告</button>
-        <button class="btn btn-login" onclick="window.location.href='8digit&pw.html'">🔒 登录</button>
+        <!-- ✅ 移动块开始 -->
+        <div class="bottom-block">
+          <p>通过创建新报告来开始一次保密对话。</p>
+          <button class="btn btn-report" onclick="goToReport()">＋ 新报告</button>
+          <button class="btn btn-login" onclick="window.location.href='8digit&pw.html'">🔒 登录</button>
+        </div>
+        <!-- ✅ 移动块结束 -->
+
       </div>
     </div>
   </div>
@@ -283,7 +296,7 @@
       const t = translations[lang];
       document.querySelector("h1").textContent = t.title;
       document.querySelectorAll("p")[0].textContent = t.policy;
-      document.querySelectorAll("p")[1].textContent = t.desc;
+      document.querySelector(".bottom-block p").textContent = t.desc;
       document.querySelector(".btn-report").textContent = t.newReport;
       document.querySelector(".btn-login").textContent = t.login;
     }
@@ -292,7 +305,7 @@
       window.location.href = "report.html";
     }
 
-    // ✅ 自动检测设备并添加相应 class（更强兼容性）
+    // ✅ 自动检测设备并添加相应 class
     function adjustLayout() {
       const isMobile = window.innerWidth <= 720;
       document.body.classList.toggle('mobile', isMobile);
@@ -311,6 +324,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
