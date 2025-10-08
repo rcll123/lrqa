@@ -83,10 +83,10 @@
 </head>
 <body>
   <div class="login-box">
-    <h2>Log in to your report</h2>
+    <h2 id="login-title"></h2>
     
     <div class="input-group">
-      <label>Enter your 8-digit report number</label>
+      <label id="label-report-number"></label>
       <div class="code-input" id="codeInputs">
         <input type="text" maxlength="1">
         <input type="text" maxlength="1">
@@ -100,15 +100,111 @@
     </div>
 
     <div class="input-group">
-      <label for="password">Enter your password</label>
-      <input type="password" id="password" placeholder="Password">
+      <label for="password" id="label-password"></label>
+      <input type="password" id="password" placeholder="">
     </div>
 
-    <a href="#" class="forgot">Forgot login?</a>
-    <button class="btn-login">Log In</button>
+    <a href="#" class="forgot" id="forgot-link"></a>
+    <button class="btn-login" id="btn-login"></button>
   </div>
 
   <script>
+    // 多语言字典
+    const translations = {
+      zh: {
+        title: "登录您的报告",
+        reportNumber: "请输入 8 位报告号",
+        password: "请输入密码",
+        password_ph: "密码",
+        forgot: "忘记登录？",
+        loginBtn: "登录"
+      },
+      en: {
+        title: "Log in to your report",
+        reportNumber: "Enter your 8-digit report number",
+        password: "Enter your password",
+        password_ph: "Password",
+        forgot: "Forgot login?",
+        loginBtn: "Log In"
+      },
+      ms: {
+        title: "Log masuk ke laporan anda",
+        reportNumber: "Masukkan nombor laporan 8 digit anda",
+        password: "Masukkan kata laluan anda",
+        password_ph: "Kata laluan",
+        forgot: "Lupa log masuk?",
+        loginBtn: "Log Masuk"
+      },
+      my: {
+        title: "သင့်အစီရင်ခံစာသို့ဝင်ရန်",
+        reportNumber: "သင့် 8-လုံးအစီရင်ခံစာနံပါတ်ထည့်ပါ",
+        password: "စကားဝှက်ထည့်ပါ",
+        password_ph: "စကားဝှက်",
+        forgot: "လော့ဂ်အင်မေ့သွားပါသလား?",
+        loginBtn: "လော့ဂ်အင်"
+      },
+      bn: {
+        title: "আপনার রিপোর্টে লগইন করুন",
+        reportNumber: "আপনার 8-সংখ্যার রিপোর্ট নম্বর লিখুন",
+        password: "আপনার পাসওয়ার্ড লিখুন",
+        password_ph: "পাসওয়ার্ড",
+        forgot: "লগইন ভুলে গেছেন?",
+        loginBtn: "লগইন"
+      },
+      ne: {
+        title: "तपाईंको रिपोर्टमा लगइन गर्नुहोस्",
+        reportNumber: "तपाईंको 8-अङ्क रिपोर्ट नम्बर प्रविष्ट गर्नुहोस्",
+        password: "तपाईंको पासवर्ड प्रविष्ट गर्नुहोस्",
+        password_ph: "पासवर्ड",
+        forgot: "लगइन बिर्सनुभयो?",
+        loginBtn: "लगइन"
+      },
+      th: {
+        title: "เข้าสู่ระบบรายงานของคุณ",
+        reportNumber: "ป้อนหมายเลขรายงาน 8 หลักของคุณ",
+        password: "ป้อนรหัสผ่านของคุณ",
+        password_ph: "รหัสผ่าน",
+        forgot: "ลืมล็อกอิน?",
+        loginBtn: "เข้าสู่ระบบ"
+      },
+      hi: {
+        title: "अपनी रिपोर्ट में लॉग इन करें",
+        reportNumber: "अपना 8-अंकीय रिपोर्ट नंबर दर्ज करें",
+        password: "अपना पासवर्ड दर्ज करें",
+        password_ph: "पासवर्ड",
+        forgot: "लॉगिन भूल गए?",
+        loginBtn: "लॉग इन करें"
+      },
+      uk: {
+        title: "Увійдіть у свій звіт",
+        reportNumber: "Введіть 8-значний номер звіту",
+        password: "Введіть свій пароль",
+        password_ph: "Пароль",
+        forgot: "Забули логін?",
+        loginBtn: "Увійти"
+      },
+      id: {
+        title: "Masuk ke laporan Anda",
+        reportNumber: "Masukkan nomor laporan 8 digit Anda",
+        password: "Masukkan kata sandi Anda",
+        password_ph: "Kata sandi",
+        forgot: "Lupa login?",
+        loginBtn: "Masuk"
+      }
+    };
+
+    // 获取 localStorage 保存的语言
+    const lang = localStorage.getItem('lang') || "zh";
+    const t = translations[lang] || translations.zh;
+
+    // 更新页面内容
+    document.getElementById("login-title").textContent = t.title;
+    document.getElementById("label-report-number").textContent = t.reportNumber;
+    document.getElementById("label-password").textContent = t.password;
+    document.getElementById("password").placeholder = t.password_ph;
+    document.getElementById("forgot-link").textContent = t.forgot;
+    document.getElementById("btn-login").textContent = t.loginBtn;
+
     // 自动跳到下一个输入框
     const inputs = document.querySelectorAll('#codeInputs input');
     inputs.forEach((input, index) => {
@@ -126,4 +222,3 @@
   </script>
 </body>
 </html>
-
