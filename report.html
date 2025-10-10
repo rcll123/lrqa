@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Anonymous Complaint Form</title>
@@ -75,11 +75,9 @@
       <label for="file" id="label-file"></label>
       <input type="file" id="file" name="file">
 
-      <!-- 隐藏字段区分页面来源 -->
+      <!-- Hidden fields -->
       <input type="hidden" name="source_page" value="report">
-      <!-- 隐藏字段记录二维码ID -->
       <input type="hidden" name="qr_id" id="qr-id" value="">
-      <!-- 隐藏字段记录语言 -->
       <input type="hidden" name="lang" id="lang" value="">
 
       <button type="submit" id="submit-btn"></button>
@@ -96,41 +94,4 @@
       ne: { title:"गोप्य गुनासो फारम", category:"गुनासोको श्रेणी:", category_ph:"गुनासोको श्रेणी प्रविष्ट गर्नुहोस्", details:"गुनासो विवरण:", details_ph:"तपाईंको गुनासो विवरण प्रविष्ट गर्नुहोस्", file:"संलग्न फाइल अपलोड गर्नुहोस् (वैकल्पिक):", submit:"गुनासो पेश गर्नुहोस्" },
       th: { title:"ฟอร์มร้องเรียนแบบไม่ระบุชื่อ", category:"ประเภทการร้องเรียน:", category_ph:"กรอกประเภทการร้องเรียน", details:"รายละเอียดการร้องเรียน:", details_ph:"กรอกรายละเอียดการร้องเรียนของคุณ", file:"อัปโหลดไฟล์แนบ (ถ้ามี):", submit:"ส่งเรื่องร้องเรียน" },
       hi: { title:"गोपनीय शिकायत फ़ॉर्म", category:"शिकायत श्रेणी:", category_ph:"शिकायत श्रेणी दर्ज करें", details:"शिकायत विवरण:", details_ph:"अपनी शिकायत का विवरण दर्ज करें", file:"संलग्नक अपलोड करें (वैकल्पिक):", submit:"शिकायत जमा करें" },
-      uk: { title:"Анонімна форма скарги", category:"Категорія скарги:", category_ph:"Введіть категорію скарги", details:"Деталі скарги:", details_ph:"Введіть деталі вашої скарги", file:"Завантажити вкладення (необов'язково):", submit:"Надіслати скаргу" },
-      id: { title:"Form Pengaduan Anonim", category:"Kategori Pengaduan:", category_ph:"Masukkan kategori pengaduan", details:"Detail Pengaduan:", details_ph:"Masukkan detail pengaduan Anda", file:"Unggah Lampiran (opsional):", submit:"Kirim Pengaduan" }
-    };
-
-    // 自动检测浏览器语言并映射到短码
-    const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
-    let lang = 'zh';
-    if (browserLang.startsWith('en')) lang='en';
-    else if (browserLang.startsWith('ms')) lang='ms';
-    else if (browserLang.startsWith('my')) lang='my';
-    else if (browserLang.startsWith('bn')) lang='bn';
-    else if (browserLang.startsWith('ne')) lang='ne';
-    else if (browserLang.startsWith('th')) lang='th';
-    else if (browserLang.startsWith('hi')) lang='hi';
-    else if (browserLang.startsWith('uk')) lang='uk';
-    else if (browserLang.startsWith('id')) lang='id';
-
-    const t = translations[lang];
-
-    // 更新页面内容
-    document.getElementById("form-title").textContent = t.title;
-    document.getElementById("label-category").textContent = t.category;
-    document.getElementById("category").placeholder = t.category_ph;
-    document.getElementById("label-details").textContent = t.details;
-    document.getElementById("details").placeholder = t.details_ph;
-    document.getElementById("label-file").textContent = t.file;
-    document.getElementById("submit-btn").textContent = t.submit;
-
-    // 获取二维码参数
-    const urlParams = new URLSearchParams(window.location.search);
-    const qrId = urlParams.get('qr') || 'default';
-    document.getElementById('qr-id').value = qrId;
-
-    // 记录语言
-    document.getElementById('lang').value = lang;
-  </script>
-</body>
-</html>
+      uk: { title:"Анонімна форма скарги", category:"К
