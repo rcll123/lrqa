@@ -91,9 +91,12 @@
       <textarea id="details" name="details" placeholder="Please describe your complaint"></textarea>
 
       <label id="label-file" for="file">Upload Attachment (optional):</label>
-      <!-- 这里是假的文件选择框样式 -->
+      <!-- 假文件按钮样式 -->
       <label class="fake-file" id="filestack-label">📎 Choose File (Upload via Filestack)</label>
       <input type="file" id="hidden-upload">
+
+      <!-- ✅ 隐藏字段：qr_id -->
+      <input type="hidden" name="qr_id" id="qr-id" value="">
 
       <button type="submit" id="submit-btn">Submit Complaint</button>
     </form>
@@ -119,6 +122,12 @@
   </script>
 
   <script>
+    // ✅ 从 URL 中读取 qr 参数，并写入隐藏字段
+    const params = new URLSearchParams(window.location.search);
+    const qrParam = params.get("qr") || "default";
+    document.getElementById("qr-id").value = qrParam;
+
+    // ✅ 多语言翻译
     const translations = {
       zh: {
         title: "匿名投诉表单",
@@ -166,3 +175,4 @@
   </script>
 </body>
 </html>
+
