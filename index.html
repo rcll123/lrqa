@@ -13,7 +13,6 @@
       height: 100vh;
       transition: all 0.3s ease;
     }
-
     .top-bar {
       width: 100%;
       height: 65px;
@@ -25,34 +24,20 @@
       padding: 0 20px;
       box-sizing: border-box;
     }
-
-    .top-bar .left-logo img {
-      height: 40px;
-    }
-
+    .top-bar .left-logo img { height: 40px; }
     .top-bar .right-controls {
       display: flex;
       align-items: center;
       gap: 15px;
     }
-
-    .top-bar .right-controls img {
-      height: 30px;
-    }
-
+    .top-bar .right-controls img { height: 30px; }
     .language-select {
       padding: 6px;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 14px;
     }
-
-    .main {
-      display: flex;
-      flex: 1;
-      transition: all 0.3s ease;
-    }
-
+    .main { display: flex; flex: 1; transition: all 0.3s ease; }
     .left-panel {
       background: url("bg.jpg") no-repeat center center;
       background-size: cover;
@@ -65,7 +50,6 @@
       text-shadow: 0 1px 4px rgba(0,0,0,0.6);
       position: relative;
     }
-
     .right-panel {
       width: 75%;
       display: flex;
@@ -75,39 +59,12 @@
       padding-left: 250px;
       position: relative;
     }
-
-    .content {
-      max-width: 420px;
-      text-align: left;
-    }
-
-    .logo {
-      margin-bottom: 20px;
-    }
-
-    .logo img {
-      width: 80px;
-    }
-
-    h1 {
-      font-size: 24px;
-      margin: 10px 0;
-      color: #222;
-      font-weight: 400;
-    }
-
-    p {
-      color: #555;
-      font-size: 14px;
-      margin: 15px 0;
-    }
-
-    p:nth-of-type(1) {
-      color: #00695c;
-      font-weight: 500;
-      margin-bottom: 50px;
-    }
-
+    .content { max-width: 420px; text-align: left; }
+    .logo { margin-bottom: 20px; }
+    .logo img { width: 80px; }
+    h1 { font-size: 24px; margin: 10px 0; color: #222; font-weight: 400; }
+    p { color: #555; font-size: 14px; margin: 15px 0; }
+    p:nth-of-type(1) { color: #00695c; font-weight: 500; margin-bottom: 50px; }
     .btn {
       display: block;
       width: 580px;
@@ -122,95 +79,35 @@
       padding-left: 20px;
       box-sizing: border-box;
     }
-
-    .btn-report {
-      background: #00695c;
-      color: white;
-    }
-
-    .btn-report:hover {
-      background: #004d40;
-    }
-
-    .btn-login {
-      background: white;
-      color: #00695c;
-    }
-
-    .btn-login:hover {
-      background: #f0f0f0;
-    }
-
-    .footer-credit {
-      text-align: right;
-      color: #00897b;
-      font-size: 13px;
-      margin-top: 10px;
-    }
-
-    .bottom-block {
-      margin-top: 0;
-    }
-
+    .btn-report { background: #00695c; color: white; }
+    .btn-report:hover { background: #004d40; }
+    .btn-login { background: white; color: #00695c; }
+    .btn-login:hover { background: #f0f0f0; }
+    .footer-credit { text-align: right; color: #00897b; font-size: 13px; margin-top: 10px; }
+    .bottom-block { margin-top: 0; }
     @media (max-width: 650px) {
-      body.mobile {
-        height: auto;
-        flex-direction: column;
-      }
-      .main.mobile {
-        flex-direction: column;
-      }
+      body.mobile { height: auto; flex-direction: column; }
+      .main.mobile { flex-direction: column; }
       .right-panel.mobile {
-        width: 100%;
-        padding: 25px;
-        justify-content: flex-start;
-        align-items: flex-start;
-        background: #f9f9f9;
-        order: 1;
+        width: 100%; padding: 25px; justify-content: flex-start; align-items: flex-start;
+        background: #f9f9f9; order: 1;
       }
       .left-panel.mobile {
-        order: 2;
-        width: 100%;
-        height: 280px;
+        order: 2; width: 100%; height: 280px;
         background: linear-gradient(to top, #004d40, #00695c);
-        background-image: url("bg.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        margin-top: 20px;
+        background-image: url("bg.jpg"); background-repeat: no-repeat;
+        background-size: cover; background-position: center; margin-top: 20px;
       }
-      .content.mobile {
-        width: 100%;
-        max-width: none;
-      }
-      .bottom-block {
-        margin-top: 80px;
-      }
-      .btn.mobile {
-        width: 90%;
-        margin: 10px 0;
-      }
-      .btn-report.mobile, .btn-login.mobile {
-        font-size: 15px;
-      }
-      h1.mobile {
-        font-size: 20px;
-      }
-      .top-bar.mobile {
-        flex-direction: row;
-        height: auto;
-      }
-      .footer-credit.mobile {
-        position: absolute;
-        bottom: 8px;
-        right: 15px;
-        color: #a5d6a7;
-        font-size: 12px;
-      }
+      .content.mobile { width: 100%; max-width: none; }
+      .bottom-block { margin-top: 80px; }
+      .btn.mobile { width: 90%; margin: 10px 0; }
+      .btn-report.mobile, .btn-login.mobile { font-size: 15px; }
+      h1.mobile { font-size: 20px; }
+      .top-bar.mobile { flex-direction: row; height: auto; }
+      .footer-credit.mobile { position: absolute; bottom: 8px; right: 15px; color: #a5d6a7; font-size: 12px; }
     }
   </style>
 </head>
-
 <body>
   <div class="top-bar">
     <div class="left-logo">
@@ -253,16 +150,10 @@
 
   <script>
     const translations = {
-      zh: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp 隐私政策", desc:"通过创建新报告来开始一次保密对话。", newReport:"＋ 新报告", login:"🔒 登录" },
-      en: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp Privacy Policy", desc:"Start a confidential conversation by creating a new report.", newReport:"+ New report", login:"🔒 Log in" },
-      ms: { title:"LRQA SpeakUp", policy:"Dasar Privasi LRQA SpeakUp", desc:"Mulakan perbualan sulit dengan membuat laporan baharu.", newReport:"+ Laporan Baharu", login:"🔒 Log Masuk" },
-      my: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp သီးသန့်မူဝါဒ", desc:"သင့်တိုင်တိုင်ပြောရန် အစီရင်ခံစာအသစ်တစ်စောင်ဖန်တီးပါ။", newReport:"＋ အစီရင်ခံစာအသစ်", login:"🔒 ဝင်ရောက်ရန်" },
-      bn: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp গোপনীয়তা নীতি", desc:"একটি নতুন রিপোর্ট তৈরি করে একটি গোপনীয় কথোপকথন শুরু করুন।", newReport:"＋ নতুন রিপোর্ট", login:"🔒 লগইন" },
-      ne: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp गोपनीयता नीति", desc:"नयाँ रिपोर्ट बनाएर गोप्य संवाद सुरु गर्नुहोस्।", newReport:"＋ नयाँ रिपोर्ट", login:"🔒 लगइन" },
-      th: { title:"LRQA SpeakUp", policy:"นโยบายความเป็นส่วนตัวของ LRQA SpeakUp", desc:"เริ่มต้นการสนทนาแบบเป็นความลับโดยสร้างรายงานใหม่", newReport:"＋ รายงานใหม่", login:"🔒 เข้าสู่ระบบ" },
-      hi: { title:"LRQA SpeakUp", policy:"LRQA SpeakUp गोपनीयता नीति", desc:"एक नई रिपोर्ट बनाकर एक गोपनीय वार्ता शुरू करें।", newReport:"＋ नई रिपोर्ट", login:"🔒 लॉगिन" },
-      uk: { title:"LRQA SpeakUp", policy:"Політика конфіденційності LRQA SpeakUp", desc:"Розпочніть конфіденційну розмову, створивши новий звіт.", newReport:"＋ Новий звіт", login:"🔒 Увійти" },
-      id: { title:"LRQA SpeakUp", policy:"Kebijakan Privasi LRQA SpeakUp", desc:"Mulai percakapan rahasia dengan membuat laporan baru.", newReport:"＋ Laporan Baru", login:"🔒 Masuk" }
+      zh:{title:"LRQA SpeakUp",policy:"LRQA SpeakUp 隐私政策",desc:"通过创建新报告来开始一次保密对话。",newReport:"＋ 新报告",login:"🔒 登录"},
+      en:{title:"LRQA SpeakUp",policy:"LRQA SpeakUp Privacy Policy",desc:"Start a confidential conversation by creating a new report.",newReport:"+ New report",login:"🔒 Log in"},
+      ms:{title:"LRQA SpeakUp",policy:"Dasar Privasi LRQA SpeakUp",desc:"Mulakan perbualan sulit dengan membuat laporan baharu.",newReport:"+ Laporan Baharu",login:"🔒 Log Masuk"},
+      my:{title:"LRQA SpeakUp",policy:"LRQA SpeakUp သီးသန့်မူဝါဒ",desc:"သင့်တိုင်တိုင်ပြောရန် အစီရင်ခံစာအသစ်တစ်စောင်ဖန်တီးပါ။",newReport:"＋ အစီရင်ခံစာအသစ်",login:"🔒 ဝင်ရောက်ရန်"}
     };
 
     function changeLanguage(lang) {
@@ -273,29 +164,39 @@
       document.querySelector(".btn-report").textContent = t.newReport;
       document.querySelector(".btn-login").textContent = t.login;
       document.querySelector(".language-select").value = lang;
-      // ✅ 保存语言设置到浏览器
       localStorage.setItem("lang", lang);
     }
 
     function autoDetectLanguage() {
       const savedLang = localStorage.getItem('lang');
-      let lang = savedLang || navigator.language.slice(0, 2).toLowerCase();
+      let lang = savedLang || navigator.language.slice(0,2).toLowerCase();
       if (!translations[lang]) lang = 'en';
       changeLanguage(lang);
-      // ✅ 确保保存已识别语言
       localStorage.setItem("lang", lang);
+    }
+
+    // ✅ 读取 URL 中的 qr 参数并保存
+    function detectQR() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const qr = urlParams.get("qr");
+      if (qr) {
+        localStorage.setItem("qr_id", qr);
+        console.log("✅ QR ID detected:", qr);
+      }
     }
 
     function goToReport() {
       const lang = document.querySelector('.language-select').value;
+      const qr = localStorage.getItem("qr_id") || "";
       localStorage.setItem('lang', lang);
-      window.location.href = "report.html";
+      window.location.href = `report.html${qr ? "?qr=" + encodeURIComponent(qr) : ""}`;
     }
 
     function goToLogin() {
       const lang = document.querySelector('.language-select').value;
+      const qr = localStorage.getItem("qr_id") || "";
       localStorage.setItem('lang', lang);
-      window.location.href = "8digit&pw.html";
+      window.location.href = `8digit&pw.html${qr ? "?qr=" + encodeURIComponent(qr) : ""}`;
     }
 
     function adjustLayout() {
@@ -313,6 +214,7 @@
     window.addEventListener('load', () => {
       adjustLayout();
       autoDetectLanguage();
+      detectQR(); // ✅ 启用QR参数识别
     });
     window.addEventListener('resize', adjustLayout);
   </script>
