@@ -32,13 +32,15 @@
       font-size: 14px;
       color: #555;
     }
-    textarea, input {
+    textarea, input[type="file"] {
       width: 100%;
       padding: 10px;
       margin-top: 6px;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 14px;
+      background-color: #fff;
+      cursor: pointer;
     }
     textarea {
       resize: vertical;
@@ -59,39 +61,108 @@
     button:hover {
       background: #004d40;
     }
+    /* 隐藏真实的 file input，只显示label样式 */
+    #hidden-upload {
+      display: none;
+    }
+    .fake-file {
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      background-color: #fff;
+      color: #555;
+      cursor: pointer;
+      text-align: left;
+    }
+    .fake-file:hover {
+      background-color: #f0f0f0;
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2 id="form-title"></h2>
+    <h2 id="form-title">Anonymous Complaint Form</h2>
+    <form action="https://formspree.io/f/mdkwzqko" method="POST" enctype="multipart/form-data">
 
-    <form id="complaint-form" action="https://formspree.io/f/manpjren" method="POST" enctype="multipart/form-data">
-      <label for="category" id="label-category"></label>
-      <input type="text" id="category" name="category" placeholder="">
+      <label id="label-details" for="details">Complaint Details:</label>
+      <textarea id="details" name="details" placeholder="Please describe your complaint"></textarea>
 
-      <label for="details" id="label-details"></label>
-      <textarea id="details" name="details" placeholder=""></textarea>
+      <label id="label-file" for="file">Upload Attachment (optional):</label>
+      <!-- 这里是假的文件选择框样式 -->
+      <label class="fake-file" id="filestack-label">📎 Choose File (Upload via Filestack)</label>
+      <input type="file" id="hidden-upload">
 
-      <label for="file" id="label-file"></label>
-      <input type="file" id="file" name="file">
-
-      <!-- Hidden fields -->
-      <input type="hidden" name="source_page" value="report">
-      <input type="hidden" name="qr_id" id="qr-id" value="">
-      <input type="hidden" name="lang" id="lang" value="">
-
-      <button type="submit" id="submit-btn"></button>
+      <button type="submit" id="submit-btn">Submit Complaint</button>
     </form>
   </div>
 
+  <!-- Filestack Script -->
+  <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+  <script>
+    const client = filestack.init('AA6bxlFcMRs6JYsXblkgTz');
+
+    document.getElementById("filestack-label").addEventListener("click", function(e) {
+      e.preventDefault();
+      client.picker({
+        onUploadDone: res => {
+          const fileName = res.filesUploaded[0].filename;
+          const url = res.filesUploaded[0].url;
+          document.getElementById("filestack-label").textContent = `📎 ${fileName} (Uploaded)`;
+          document.getElementById("details").value += `\n\n📎 Attachment: ${url}`;
+          alert("File uploaded successfully!");
+        }
+      }).open();
+    });
+  </script>
+
   <script>
     const translations = {
-      zh: { title:"匿名投诉表单", category:"投诉类别：", category_ph:"请输入投诉类别", details:"投诉详情：", details_ph:"请输入您的投诉内容", file:"上传附件（可选）：", submit:"提交投诉" },
-      en: { title:"Anonymous Complaint Form", category:"Complaint Category:", category_ph:"Enter complaint category", details:"Complaint Details:", details_ph:"Enter your complaint details", file:"Upload Attachment (optional):", submit:"Submit Complaint" },
-      ms: { title:"Borang Aduan Tanpa Nama", category:"Kategori Aduan:", category_ph:"Masukkan kategori aduan", details:"Butiran Aduan:", details_ph:"Masukkan butiran aduan anda", file:"Muat Naik Lampiran (pilihan):", submit:"Hantar Aduan" },
-      my: { title:"LRQA SpeakUp သီးသန့်မူဝါဒ အစီရင်ခံစာ", category:"အကြောင်းအရာအမျိုးအစား:", category_ph:"အကြောင်းအရာအမျိုးအစားထည့်ပါ", details:"အကြောင်းအရာအသေးစိတ်:", details_ph:"သင့်အကြောင်းအရာအသေးစိတ်ထည့်ပါ", file:"ဖိုင်တင်ရန် (စိတ်ကြိုက်):", submit:"တင်သွင်းရန်" },
-      bn: { title:"গোপনীয় অভিযোগ ফর্ম", category:"অভিযোগের ধরন:", category_ph:"অভিযোগের ধরন লিখুন", details:"অভিযোগের বিস্তারিত:", details_ph:"আপনার অভিযোগের বিস্তারিত লিখুন", file:"সংযুক্তি আপলোড করুন (ঐচ্ছিক):", submit:"অভিযোগ জমা দিন" },
-      ne: { title:"गोप्य गुनासो फारम", category:"गुनासोको श्रेणी:", category_ph:"गुनासोको श्रेणी प्रविष्ट गर्नुहोस्", details:"गुनासो विवरण:", details_ph:"तपाईंको गुनासो विवरण प्रविष्ट गर्नुहोस्", file:"संलग्न फाइल अपलोड गर्नुहोस् (वैकल्पिक):", submit:"गुनासो पेश गर्नुहोस्" },
-      th: { title:"ฟอร์มร้องเรียนแบบไม่ระบุชื่อ", category:"ประเภทการร้องเรียน:", category_ph:"กรอกประเภทการร้องเรียน", details:"รายละเอียดการร้องเรียน:", details_ph:"กรอกรายละเอียดการร้องเรียนของคุณ", file:"อัปโหลดไฟล์แนบ (ถ้ามี):", submit:"ส่งเรื่องร้องเรียน" },
-      hi: { title:"गोपनीय शिकायत फ़ॉर्म", category:"शिकायत श्रेणी:", category_ph:"शिकायत श्रेणी दर्ज करें", details:"शिकायत विवरण:", details_ph:"अपनी शिकायत का विवरण दर्ज करें", file:"संलग्नक अपलोड करें (वैकल्पिक):", submit:"शिकायत जमा करें" },
-      uk: { title:"Анонімна форма скарги", category:"К
+      zh: {
+        title: "匿名投诉表单",
+        details: "投诉详情：",
+        detailsPH: "请输入您的投诉内容",
+        file: "上传附件（可选）：",
+        submit: "提交投诉",
+        upload: "📎 选择文件（通过 Filestack 上传）"
+      },
+      en: {
+        title: "Anonymous Complaint Form",
+        details: "Complaint Details:",
+        detailsPH: "Please describe your complaint",
+        file: "Upload Attachment (optional):",
+        submit: "Submit Complaint",
+        upload: "📎 Choose File (Upload via Filestack)"
+      },
+      ms: {
+        title: "Borang Aduan Tanpa Nama",
+        details: "Butiran Aduan:",
+        detailsPH: "Sila nyatakan aduan anda",
+        file: "Muat Naik Lampiran (pilihan):",
+        submit: "Hantar Aduan",
+        upload: "📎 Pilih Fail (Muat Naik melalui Filestack)"
+      }
+    };
+
+    function setLanguage() {
+      let lang = localStorage.getItem("lang");
+      if (!lang) {
+        lang = (navigator.language || "en").substring(0, 2).toLowerCase();
+      }
+      if (!translations[lang]) lang = "en";
+      const t = translations[lang];
+
+      document.getElementById("form-title").textContent = t.title;
+      document.getElementById("label-details").textContent = t.details;
+      document.getElementById("details").placeholder = t.detailsPH;
+      document.getElementById("label-file").textContent = t.file;
+      document.getElementById("submit-btn").textContent = t.submit;
+      document.getElementById("filestack-label").textContent = t.upload;
+    }
+
+    setLanguage();
+  </script>
+</body>
+</html>
