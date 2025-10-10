@@ -14,7 +14,6 @@
       transition: all 0.3s ease;
     }
 
-    /* 顶部白色框 */
     .top-bar {
       width: 100%;
       height: 65px;
@@ -48,14 +47,12 @@
       font-size: 14px;
     }
 
-    /* 主体部分：左右结构 */
     .main {
       display: flex;
       flex: 1;
       transition: all 0.3s ease;
     }
 
-    /* 左边绿色背景图 */
     .left-panel {
       background: url("bg.jpg") no-repeat center center;
       background-size: cover;
@@ -69,7 +66,6 @@
       position: relative;
     }
 
-    /* 右侧主要内容 */
     .right-panel {
       width: 75%;
       display: flex;
@@ -112,7 +108,6 @@
       margin-bottom: 50px;
     }
 
-    /* 按钮样式 */
     .btn {
       display: block;
       width: 580px;
@@ -146,7 +141,6 @@
       background: #f0f0f0;
     }
 
-    /* ✅ by SpeakUp 标志 */
     .footer-credit {
       text-align: right;
       color: #00897b;
@@ -154,22 +148,18 @@
       margin-top: 10px;
     }
 
-    /* ✅ 移动块样式控制 */
     .bottom-block {
       margin-top: 0;
     }
 
-    /* ✅ 手机模式 */
     @media (max-width: 650px) {
       body.mobile {
         height: auto;
         flex-direction: column;
       }
-
       .main.mobile {
         flex-direction: column;
       }
-
       .right-panel.mobile {
         width: 100%;
         padding: 25px;
@@ -178,7 +168,6 @@
         background: #f9f9f9;
         order: 1;
       }
-
       .left-panel.mobile {
         order: 2;
         width: 100%;
@@ -190,35 +179,27 @@
         background-position: center;
         margin-top: 20px;
       }
-
       .content.mobile {
         width: 100%;
         max-width: none;
       }
-
-      /* ✅ 手机下移控制 */
       .bottom-block {
         margin-top: 80px;
       }
-
       .btn.mobile {
         width: 90%;
         margin: 10px 0;
       }
-
       .btn-report.mobile, .btn-login.mobile {
         font-size: 15px;
       }
-
       h1.mobile {
         font-size: 20px;
       }
-
       .top-bar.mobile {
         flex-direction: row;
         height: auto;
       }
-
       .footer-credit.mobile {
         position: absolute;
         bottom: 8px;
@@ -231,7 +212,6 @@
 </head>
 
 <body>
-  <!-- 顶部白色栏 -->
   <div class="top-bar">
     <div class="left-logo">
       <img src="su.jpg" alt="公司 Logo">
@@ -253,11 +233,8 @@
     </div>
   </div>
 
-  <!-- 主体内容 -->
   <div class="main">
-    <div class="left-panel">
-      
-    </div>
+    <div class="left-panel"></div>
     <div class="right-panel">
       <div class="content">
         <div class="logo">
@@ -265,15 +242,11 @@
         </div>
         <h1>LRQA SpeakUp</h1>
         <p>LRQA SpeakUp 隐私政策</p>
-
-        <!-- ✅ 移动块开始 -->
         <div class="bottom-block">
           <p>通过创建新报告来开始一次保密对话。</p>
           <button class="btn btn-report" onclick="goToReport()">＋ 新报告</button>
           <button class="btn btn-login" onclick="window.location.href='8digit&pw.html'">🔒 登录</button>
         </div>
-        <!-- ✅ 移动块结束 -->
-
       </div>
     </div>
   </div>
@@ -293,23 +266,28 @@
     };
 
     function changeLanguage(lang) {
-      const t = translations[lang];
+      const t = translations[lang] || translations['en'];
       document.querySelector("h1").textContent = t.title;
       document.querySelectorAll("p")[0].textContent = t.policy;
       document.querySelector(".bottom-block p").textContent = t.desc;
       document.querySelector(".btn-report").textContent = t.newReport;
       document.querySelector(".btn-login").textContent = t.login;
+      document.querySelector(".language-select").value = lang;
+    }
+
+    function autoDetectLanguage() {
+      const savedLang = localStorage.getItem('lang');
+      let lang = savedLang || navigator.language.slice(0, 2).toLowerCase();
+      if (!translations[lang]) lang = 'en';
+      changeLanguage(lang);
     }
 
     function goToReport() {
-  // 把当前语言存到 localStorage
-  const lang = document.querySelector('.language-select').value;
-  localStorage.setItem('lang', lang);
-  window.location.href = "report.html";
-}
+      const lang = document.querySelector('.language-select').value;
+      localStorage.setItem('lang', lang);
+      window.location.href = "report.html";
+    }
 
-
-    // ✅ 自动检测设备并添加相应 class
     function adjustLayout() {
       const isMobile = window.innerWidth <= 720;
       document.body.classList.toggle('mobile', isMobile);
@@ -320,13 +298,13 @@
       document.querySelectorAll('.btn').forEach(btn => btn.classList.toggle('mobile', isMobile));
       document.querySelector('h1').classList.toggle('mobile', isMobile);
       document.querySelector('.top-bar').classList.toggle('mobile', isMobile);
-      document.querySelector('.footer-credit').classList.toggle('mobile', isMobile);
     }
 
-    window.addEventListener('load', adjustLayout);
+    window.addEventListener('load', () => {
+      adjustLayout();
+      autoDetectLanguage();
+    });
     window.addEventListener('resize', adjustLayout);
   </script>
 </body>
 </html>
-
-
