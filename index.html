@@ -245,7 +245,7 @@
         <div class="bottom-block">
           <p>通过创建新报告来开始一次保密对话。</p>
           <button class="btn btn-report" onclick="goToReport()">＋ 新报告</button>
-          <button class="btn btn-login" onclick="window.location.href='8digit&pw.html'">🔒 登录</button>
+          <button class="btn btn-login" onclick="goToLogin()">🔒 登录</button>
         </div>
       </div>
     </div>
@@ -273,6 +273,8 @@
       document.querySelector(".btn-report").textContent = t.newReport;
       document.querySelector(".btn-login").textContent = t.login;
       document.querySelector(".language-select").value = lang;
+      // ✅ 保存语言设置到浏览器
+      localStorage.setItem("lang", lang);
     }
 
     function autoDetectLanguage() {
@@ -280,12 +282,20 @@
       let lang = savedLang || navigator.language.slice(0, 2).toLowerCase();
       if (!translations[lang]) lang = 'en';
       changeLanguage(lang);
+      // ✅ 确保保存已识别语言
+      localStorage.setItem("lang", lang);
     }
 
     function goToReport() {
       const lang = document.querySelector('.language-select').value;
       localStorage.setItem('lang', lang);
       window.location.href = "report.html";
+    }
+
+    function goToLogin() {
+      const lang = document.querySelector('.language-select').value;
+      localStorage.setItem('lang', lang);
+      window.location.href = "8digit&pw.html";
     }
 
     function adjustLayout() {
